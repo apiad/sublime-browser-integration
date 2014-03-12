@@ -25,7 +25,7 @@ under the `home` key (`localhost:8000` for a start).
 
 **Reload Chrome** (`ctrl+shift+b` `r`) does what it says, reloads Chrome.
 
-**Evaluate in Chrome (`ctrl+shift+b` `e`) ** takes the selected JavaScript source
+**Evaluate in Chrome** (`ctrl+shift+b` `e`) takes the selected JavaScript source
 and evaluates it in the Chrome instance, in the currently
 open tab.
 
