@@ -1,8 +1,7 @@
 Browser Integration
 ===================
 
-A Sublime Text 3 plugin for interacting with the
-browser and do developer related tasks.
+A Sublime Text 3 plugin for interacting with the browser and do developer related tasks.
 
 
 What does it do?
@@ -58,23 +57,22 @@ How to install
 --------------
 
 The recommended method is using [Sublime Package Control](https://sublime.wbond.net).
-If you don't know, go check it out.
+If you don't know it, go check it out.
 
-You can also [clone directly](https://github.com/apiad/sublime-browser-integration.git)
-from Github, or download a [zip](https://github.com/apiad/sublime-browser-integration/archive/master.zip),
+You can also [clone directly](https://github.com/apiad/sublime-browser-integration.git) from Github, or download a [zip](https://github.com/apiad/sublime-browser-integration/archive/master.zip),
 and unpack it in your Sublime Text 3 packages folder. If you don't know how to do
 this, you definitely need the Package Control plugin.
 
 Besides that, you need a recent version of Chrome (31 or greater) and the
 [Chrome WebDriver](http://chromedriver.storage.googleapis.com/index.html)
 executable in your path (in Linux you can drop it in `/usr/bin/`).
+Check that is has execution permissions (`chmod a+x chromedriver`).
 
 
 How does it work?
 -----------------
 
-The plugin ships with a modified version of
-[selenium for Python](https://pypi.python.org/pypi/selenium),
+The plugin ships with a modified version of [selenium for Python](https://pypi.python.org/pypi/selenium),
 which does the browser controlling magic. That and a few handy JavaScript
 and Python gets the work done.
 
