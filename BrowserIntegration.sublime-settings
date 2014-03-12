@@ -1,3 +1,4 @@
 {
-    "home": "localhost:8000"
+    "home": "localhost:8000",
+    "highlight-overlay": "2px solid red"
 }

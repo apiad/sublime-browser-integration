@@ -14,22 +14,22 @@ to send commands to the browser from within ST3.
 
 Right now we provide a few commands:
 
-**Run Chrome** will open a new Google Chrome instance.
+**Run Chrome** (`ctrl+shift+b` `l`) will open a new Google Chrome instance.
 All other commands require this one to be called first,
 and will complain (in your status bar) if Chrome is not
 open, or if the plugin has lost the connection somehow.
 
-**Go To URL** tells Chrome to navigate to a new URL.
+**Go To URL** (`ctrl+shift+b` `g`) tells Chrome to navigate to a new URL.
 By default, it open the one specified in the plugin settings,
 under the `home` key (`localhost:8000` for a start).
 
-**Reload Chrome** does what it says, reloads Chrome.
+**Reload Chrome** (`ctrl+shift+b` `r`) does what it says, reloads Chrome.
 
-**Evaluate in Chrome** takes the selected JavaScript source
+**Evaluate in Chrome (`ctrl+shift+b` `e`) ** takes the selected JavaScript source
 and evaluates it in the Chrome instance, in the currently
 open tab.
 
-**Highlight in Chrome** opens a tiny input box, where you
+**Highlight in Chrome** (`ctrl+shift+b` `h`) opens a tiny input box, where you
 can type any valid CSS selector. Matching items are highlighted
 in the Chrome instance as you type, and stay highlighted
 after you close.

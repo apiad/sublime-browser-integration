@@ -25,10 +25,10 @@ def async(function):
     return wrapper
 
 
-def setting(cmd, setting, default=None):
+def setting(setting, cmd=None, default=None):
         settings = sublime.load_settings(SETTINGS_FILE)
 
-        if hasattr(cmd, 'view'):
+        if cmd and hasattr(cmd, 'view'):
             view_settings = cmd.view.settings()
         else:
             view_settings = {}
@@ -82,7 +82,7 @@ class OpenBrowserCommand(sublime_plugin.ApplicationCommand):
 
             loading("Opening Chrome new instance.")
             local_chrome = Chrome()
-            home = setting(self, 'home')
+            home = setting('home', self)
             loading("Loading %s" % home)
             local_chrome.get(home)
             status("Chrome is up and running!")
@@ -121,7 +121,7 @@ class GoToUrlCommand(sublime_plugin.WindowCommand):
             chrome.get(str)
             status("Loaded %s" % str)
 
-        self.window.show_input_panel('Enter URL', setting(self, 'home'),
+        self.window.show_input_panel('Enter URL', setting('home', self),
                                      onDone, None, None)
 
 
@@ -152,7 +152,7 @@ select_js = """
     for (var i=0; i<elements.length; i++) {
         var el = elements[i];
         el.setAttribute("data-bi-outline", el.style.outline);
-        el.style.outline = "1px solid red";
+        el.style.outline = "%s";
     }
 """
 
@@ -179,7 +179,7 @@ def highlight(selector):
     if old_selector is not None:
         chrome.execute_script(unselect_js % old_selector)
 
-    chrome.execute_script(select_js % selector)
+    chrome.execute_script(select_js % (selector, setting('highlight-overlay')))
     old_selector = selector
 
 

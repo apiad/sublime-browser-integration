@@ -1,0 +1,16 @@
+[{
+  "keys": ["super+shift+b", "l"],
+  "command": "open_browser"
+}, {
+  "keys": ["super+shift+b", "g"],
+  "command": "go_to_url"
+}, {
+  "keys": ["super+shift+b", "r"],
+  "command": "reload_browser"
+}, {
+  "keys": ["super+alt+b", "h"],
+  "command": "highlight_in_browser"
+}, {
+  "keys": ["super+alt+b", "e"],
+  "command": "run_javascript_in_browser"
+}]
