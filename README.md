@@ -12,7 +12,7 @@ This plugin fires up browser (Chrome only, for now),
 and keeps a connection open with it, that allows you
 to send commands to the browser from within ST3.
 
-Right now we provide a few commands:
+Right now it provides a few commands:
 
 **Run Chrome** (`ctrl+shift+b` `l`) will open a new Google Chrome instance.
 All other commands require this one to be called first,
@@ -33,6 +33,25 @@ open tab.
 can type any valid CSS selector. Matching items are highlighted
 in the Chrome instance as you type, and stay highlighted
 after you close.
+
+These highlighted elements can be used in other
+commands, to make specific DOM manipulations:
+
+**Click selected elements** (`ctrl+shift+b` `c`) clicks all elements
+previously selected.
+
+**Type into selected elements** (`ctrl+shift+b` `t`) opens an input
+box to type into the previously selected elements.
+
+With these commands in combination you can easily automatize boring tasks.
+For instance, every time I work on my site's project, I open ST3, start my
+development server, open Chrome, navigate to `localhost:8000`, type in
+my credentials, and then I can start developing.
+
+Right now I'm working on a macro utility for the plugin, that
+will be available shortly. We need a special macro system,
+because most of these commands are asynchronous, and hence don't
+get along very well with the integrated Sublime macro system.
 
 
 How to install
@@ -68,10 +87,11 @@ We are working on a few exciting new features:
 * Automatic reload on save.
 * Live CSS editing.
 * Live highlight of selected jQuery selectors.
+* Macro recording and playing.
 * And many more...
 
 
 Collaborating
 -------------
 
-Sure, come to [Github]().
+Sure, come to [Github](https://github.com/apiad/sublime-browser-integration).

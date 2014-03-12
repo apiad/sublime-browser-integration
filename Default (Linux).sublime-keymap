@@ -8,9 +8,15 @@
   "keys": ["ctrl+shift+b", "r"],
   "command": "reload_browser"
 }, {
-  "keys": ["ctrl+alt+b", "h"],
+  "keys": ["ctrl+shift+b", "h"],
   "command": "highlight_in_browser"
 }, {
-  "keys": ["ctrl+alt+b", "e"],
+  "keys": ["ctrl+shift+b", "c"],
+  "command": "click_selected_elements_in_browser"
+}, {
+  "keys": ["ctrl+shift+b", "t"],
+  "command": "type_selected_elements_in_browser"
+}, {
+  "keys": ["ctrl+shift+b", "e"],
   "command": "run_javascript_in_browser"
 }]

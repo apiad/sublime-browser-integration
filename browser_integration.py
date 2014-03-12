@@ -101,7 +101,7 @@ class ReloadBrowserCommand(sublime_plugin.ApplicationCommand):
 
         @async
         def refresh_browser():
-            loading("Refreshing browser")
+            status("Refreshing browser")
             chrome.refresh()
 
         refresh_browser()
@@ -193,3 +193,48 @@ class HighlightInBrowserCommand(sublime_plugin.WindowCommand):
 
         self.window.show_input_panel('Selector', '',
                                      None, highlight, None)
+
+
+class ClickSelectedElementsInBrowser(sublime_plugin.WindowCommand):
+    def run(self):
+        global chrome
+
+        if chrome is None:
+            warning("Chrome is not running.")
+            return
+
+        if not old_selector:
+            warning("No items are currently selected.")
+            return
+
+        @async
+        def click():
+            status('Clicking all selected items')
+
+            for e in chrome.find_elements_by_css_selector(old_selector):
+                e.click()
+
+        click()
+
+
+class TypeSelectedElementsInBrowser(sublime_plugin.WindowCommand):
+    def run(self):
+        global chrome
+
+        if chrome is None:
+            warning("Chrome is not running.")
+            return
+
+        if not old_selector:
+            warning("No items are currently selected.")
+            return
+
+        @async
+        def send_keys(str):
+            status('Clicking all selected items')
+
+            for e in chrome.find_elements_by_css_selector(old_selector):
+                e.send_keys(str)
+
+        self.window.show_input_panel('Input', '',
+                                     send_keys, None, None)
