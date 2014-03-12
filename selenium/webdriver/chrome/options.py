@@ -16,7 +16,7 @@
 # limitations under the License.
 
 import os
-from BrowserIntegration.selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import base64
 
 

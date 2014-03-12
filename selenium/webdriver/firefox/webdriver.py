@@ -22,10 +22,10 @@ import shutil
 import socket
 import sys
 from .firefox_binary import FirefoxBinary
-from BrowserIntegration.selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from BrowserIntegration.selenium.webdriver.firefox.extension_connection import ExtensionConnection
-from BrowserIntegration.selenium.webdriver.firefox.firefox_profile import FirefoxProfile
-from BrowserIntegration.selenium.webdriver.remote.webdriver import WebDriver as RemoteWebDriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.firefox.extension_connection import ExtensionConnection
+from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
+from selenium.webdriver.remote.webdriver import WebDriver as RemoteWebDriver
 
 
 class WebDriver(RemoteWebDriver):

@@ -19,11 +19,11 @@ from .command import Command
 from .webelement import WebElement
 from .remote_connection import RemoteConnection
 from .errorhandler import ErrorHandler
-from BrowserIntegration.selenium.common.exceptions import WebDriverException
-from BrowserIntegration.selenium.common.exceptions import InvalidSelectorException
-from BrowserIntegration.selenium.webdriver.common.by import By
-from BrowserIntegration.selenium.webdriver.common.alert import Alert
-from BrowserIntegration.selenium.webdriver.common.html5.application_cache import ApplicationCache
+from selenium.common.exceptions import WebDriverException
+from selenium.common.exceptions import InvalidSelectorException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.alert import Alert
+from selenium.webdriver.common.html5.application_cache import ApplicationCache
 
 try:
     str = basestring

@@ -24,10 +24,10 @@ import base64
 
 
 from .command import Command
-from BrowserIntegration.selenium.common.exceptions import WebDriverException
-from BrowserIntegration.selenium.common.exceptions import InvalidSelectorException
-from BrowserIntegration.selenium.webdriver.common.by import By
-from BrowserIntegration.selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import WebDriverException 
+from selenium.common.exceptions import InvalidSelectorException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 
 try:
     str = basestring
@@ -68,7 +68,7 @@ class WebElement(object):
 
     def get_attribute(self, name):
         """Gets the attribute value.
-
+        
         :Args:
             - name - name of the attribute property to retieve.
 
@@ -102,16 +102,16 @@ class WebElement(object):
 
     def find_element_by_id(self, id_):
         """Finds element within the child elements of this element.
-
+        
         :Args:
             - id_ - ID of child element to locate.
         """
         return self.find_element(by=By.ID, value=id_)
 
     def find_elements_by_id(self, id_):
-        """Finds a list of elements within the children of this element
+        """Finds a list of elements within the children of this element 
         with the matching ID.
-
+        
         :Args:
             - id_ - Id of child element to find.
         """
@@ -126,7 +126,7 @@ class WebElement(object):
 
     def find_elements_by_name(self, name):
         """Finds a list of elements with in this element's children by name.
-
+        
         :Args:
             - name - name property to search for.
         """
@@ -134,7 +134,7 @@ class WebElement(object):
 
     def find_element_by_link_text(self, link_text):
         """Finds element with in this element's children by visible link text.
-
+        
         :Args:
             - link_text - Link text string to search for.
         """
@@ -142,7 +142,7 @@ class WebElement(object):
 
     def find_elements_by_link_text(self, link_text):
         """Finds a list of elements with in this element's children by visible link text.
-
+        
         :Args:
             - link_text - Link text string to search for.
         """
@@ -150,7 +150,7 @@ class WebElement(object):
 
     def find_element_by_partial_link_text(self, link_text):
         """Finds element with in this element's children by parial visible link text.
-
+        
         :Args:
             - link_text - Link text string to search for.
         """
@@ -158,7 +158,7 @@ class WebElement(object):
 
     def find_elements_by_partial_link_text(self, link_text):
         """Finds a list of elements with in this element's children by link text.
-
+        
         :Args:
             - link_text - Link text string to search for.
         """
@@ -166,7 +166,7 @@ class WebElement(object):
 
     def find_element_by_tag_name(self, name):
         """Finds element with in this element's children by tag name.
-
+        
         :Args:
             - name - name of html tag (eg: h1, a, span)
         """
@@ -174,7 +174,7 @@ class WebElement(object):
 
     def find_elements_by_tag_name(self, name):
         """Finds a list of elements with in this element's children by tag name.
-
+        
         :Args:
             - name - name of html tag (eg: h1, a, span)
         """
@@ -182,7 +182,7 @@ class WebElement(object):
 
     def find_element_by_xpath(self, xpath):
         """Finds element by xpath.
-
+        
         :Args:
             xpath - xpath of element to locate.  "//input[@class='myelement']"
 
@@ -201,7 +201,7 @@ class WebElement(object):
 
     def find_elements_by_xpath(self, xpath):
         """Finds elements within the elements by xpath.
-
+        
         :Args:
             - xpath - xpath locator string.
 
@@ -219,7 +219,7 @@ class WebElement(object):
 
     def find_element_by_class_name(self, name):
         """Finds an element within this element's children by their class name.
-
+        
         :Args:
             - name - class name to search on.
         """
@@ -227,7 +227,7 @@ class WebElement(object):
 
     def find_elements_by_class_name(self, name):
         """Finds a list of elements within children of this element by their class name.
-
+        
         :Args:
             - name - class name to search on.
         """
@@ -235,16 +235,16 @@ class WebElement(object):
 
     def find_element_by_css_selector(self, css_selector):
         """Find and return an element that's a child of this element by CSS selector.
-
+        
         :Args:
             - css_selector - CSS selctor string, ex: 'a.nav#home'
         """
         return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
 
     def find_elements_by_css_selector(self, css_selector):
-        """Find and return list of multiple elements within the children of this
+        """Find and return list of multiple elements within the children of this 
         element by CSS selector.
-
+        
         :Args:
             - css_selector - CSS selctor string, ex: 'a.nav#home'
         """
@@ -254,19 +254,19 @@ class WebElement(object):
         """Simulates typing into the element.
 
         :Args:
-            - value - A string for typing, or setting form fields.  For setting
+            - value - A string for typing, or setting form fields.  For setting 
             file inputs, this could be a local file path.
 
         Use this to send simple key events or to fill out form fields::
 
             form_textfield = driver.find_element_by_name('username')
             form_textfield.send_keys("admin")
-
+        
         This can also be used to set file inputs.::
 
             file_input = driver.find_element_by_name('profilePic')
             file_input.send_keys("path/to/profilepic.gif")
-            # Generally it's better to wrap the file path in one of the methods
+            # Generally it's better to wrap the file path in one of the methods 
             # in os.path to return the actual path to support cross OS testing.
             # file_input.send_keys(os.path.abspath("path/to/profilepic.gif"))
 
@@ -335,11 +335,11 @@ class WebElement(object):
 
     @property
     def id(self):
-        """ Returns internal id used by selenium.
-
-        This is mainly for internal use.  Simple use cases such as checking if 2 webelements
+        """ Returns internal id used by selenium. 
+        
+        This is mainly for internal use.  Simple use cases such as checking if 2 webelements 
         refer to the same element, can be done using '=='::
-
+        
             if element1 == element2:
                 print("These 2 are equal")
 
@@ -388,7 +388,7 @@ class WebElement(object):
         zipped.write(filename, os.path.split(filename)[1])
         zipped.close()
         try:
-            return self._execute(Command.UPLOAD_FILE,
+            return self._execute(Command.UPLOAD_FILE, 
                             {'file': base64.encodestring(fp.getvalue())})['value']
         except WebDriverException as e:
             if "Unrecognized command: POST" in e.__str__():

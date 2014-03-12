@@ -16,19 +16,19 @@
 """
 The ActionChains implementation,
 """
-from BrowserIntegration.selenium.webdriver.remote.command import Command
-from BrowserIntegration.selenium.webdriver.common.keys import Keys
+from selenium.webdriver.remote.command import Command
+from selenium.webdriver.common.keys import Keys
 
 class ActionChains(object):
     """
-    ActionChains are a way to automate low level interactions such as
+    ActionChains are a way to automate low level interactions such as 
     mouse movements, mouse button actions, key press, and context menu interactions.
-    This is useful for doing more complex actions like hover over and drag and drop.
+    This is useful for doing more complex actions like hover over and drag and drop. 
 
     Generate user actions.
-       When you call methods for actions on the ActionChains object,
-       the actions are stored in a queue in the ActionChains object.
-       When you call perform(), the events are fired in the order they
+       When you call methods for actions on the ActionChains object, 
+       the actions are stored in a queue in the ActionChains object. 
+       When you call perform(), the events are fired in the order they 
        are queued up.
 
     ActionChains can be used in a chain pattern::
@@ -48,7 +48,7 @@ class ActionChains(object):
         actions.click(hidden_submenu)
         actions.perform()
 
-    Either way, the actions are performed in the order they are called, one after
+    Either way, the actions are performed in the order they are called, one after 
     another.
     """
 
@@ -158,7 +158,7 @@ class ActionChains(object):
          - value: The modifier key to send. Values are defined in `Keys` class.
          - element: The element to send keys.
            If None, sends a key to current focused element.
-
+        
         Example, pressing ctrl+c::
 
             ActionsChains(driver).key_down(Keys.CONTROL).send_keys('c').key_up(Keys.CONTROL).perform()
@@ -250,11 +250,11 @@ class ActionChains(object):
         Sends keys to current focused element.
 
         :Args:
-         - keys_to_send: The keys to send.  Modifier keys constants can be found in the
+         - keys_to_send: The keys to send.  Modifier keys constants can be found in the 
          'Keys' class.
         """
         self._actions.append(lambda:
-            self._driver.execute(Command.SEND_KEYS_TO_ACTIVE_ELEMENT,
+            self._driver.execute(Command.SEND_KEYS_TO_ACTIVE_ELEMENT, 
               { 'value': self._keys_to_typing(keys_to_send)}))
         return self
 
@@ -264,7 +264,7 @@ class ActionChains(object):
 
         :Args:
          - element: The element to send keys.
-         - keys_to_send: The keys to send.  Modifier keys constants can be found in the
+         - keys_to_send: The keys to send.  Modifier keys constants can be found in the 
          'Keys' class.
         """
         self._actions.append(lambda:

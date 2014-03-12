@@ -15,9 +15,9 @@
 # limitations under the License.
 
 import base64
-from BrowserIntegration.selenium.webdriver.remote.command import Command
-from BrowserIntegration.selenium.webdriver.remote.webdriver import WebDriver as RemoteWebDriver
-from BrowserIntegration.selenium.common.exceptions import WebDriverException
+from selenium.webdriver.remote.command import Command
+from selenium.webdriver.remote.webdriver import WebDriver as RemoteWebDriver
+from selenium.common.exceptions import WebDriverException
 from .service import Service
 from .options import Options
 
@@ -65,7 +65,7 @@ class WebDriver(RemoteWebDriver):
                 keep_alive=True)
         except:
             self.quit()
-            raise
+            raise 
         self._is_remote = False
 
     def quit(self):

@@ -28,7 +28,7 @@ except ImportError: # above is available in py3+, below is py2.7
 
 from .command import Command
 from .errorhandler import ErrorCode
-from BrowserIntegration.selenium.webdriver.remote.utils import *
+from . import utils
 
 LOGGER = logging.getLogger(__name__)
 
@@ -343,7 +343,7 @@ class RemoteConnection(object):
         """
         command_info = self._commands[command]
         assert command_info is not None, 'Unrecognised command %s' % command
-        data = dump_json(params)
+        data = utils.dump_json(params)
         path = string.Template(command_info[1]).substitute(params)
         url = '%s%s' % (self._url, path)
         return self._request(url, method=command_info[0], data=data)
@@ -427,7 +427,7 @@ class RemoteConnection(object):
                 content_type = resp.getheader('Content-Type').split(';')
             if not any([x.startswith('image/png') for x in content_type]):
                 try:
-                    data = load_json(body.strip())
+                    data = utils.load_json(body.strip())
                 except ValueError:
                     if 199 < statuscode < 300:
                         status = ErrorCode.SUCCESS

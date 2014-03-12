@@ -17,18 +17,18 @@
 import subprocess
 from subprocess import PIPE
 import time
-from BrowserIntegration.selenium.common.exceptions import WebDriverException
-from BrowserIntegration.selenium.webdriver.common import utils
+from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.common import utils
 
 class Service(object):
     """
-    Object that manages the starting and stopping of the OperaDriver
+    Object that manages the starting and stopping of the OperaDriver 
     """
 
     def __init__(self, executable_path, port=0):
         """
         Creates a new instance of the Service
-
+        
         :Args:
          - executable_path : Path to the OperaDriver
          - port : Port the service is running on """
@@ -40,8 +40,8 @@ class Service(object):
 
     def start(self):
         """
-        Starts the OperaDriver Service.
-
+        Starts the OperaDriver Service. 
+        
         :Exceptions:
          - WebDriverException : Raised either when it can't start the service
            or when it can't connect to the service
@@ -59,7 +59,7 @@ class Service(object):
             time.sleep(1)
             if count == 30:
                  raise WebDriverException("Can not connect to the OperaDriver")
-
+                
     @property
     def service_url(self):
         """
@@ -68,7 +68,7 @@ class Service(object):
         return "http://localhost:%d/wd/hub" % self.port
 
     def stop(self):
-        """
+        """ 
         Tells the OperaDriver to stop and cleans up the process
         """
         #If its dead dont worry

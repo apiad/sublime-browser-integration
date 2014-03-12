@@ -13,24 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from BrowserIntegration.selenium.common.exceptions import ElementNotSelectableException
-from BrowserIntegration.selenium.common.exceptions import ElementNotVisibleException
-from BrowserIntegration.selenium.common.exceptions import InvalidCookieDomainException
-from BrowserIntegration.selenium.common.exceptions import InvalidElementStateException
-from BrowserIntegration.selenium.common.exceptions import InvalidSelectorException
-from BrowserIntegration.selenium.common.exceptions import ImeNotAvailableException
-from BrowserIntegration.selenium.common.exceptions import ImeActivationFailedException
-from BrowserIntegration.selenium.common.exceptions import NoSuchElementException
-from BrowserIntegration.selenium.common.exceptions import NoSuchFrameException
-from BrowserIntegration.selenium.common.exceptions import NoSuchWindowException
-from BrowserIntegration.selenium.common.exceptions import StaleElementReferenceException
-from BrowserIntegration.selenium.common.exceptions import UnableToSetCookieException
-from BrowserIntegration.selenium.common.exceptions import UnexpectedAlertPresentException
-from BrowserIntegration.selenium.common.exceptions import NoAlertPresentException
-from BrowserIntegration.selenium.common.exceptions import ErrorInResponseException
-from BrowserIntegration.selenium.common.exceptions import TimeoutException
-from BrowserIntegration.selenium.common.exceptions import WebDriverException
-from BrowserIntegration.selenium.common.exceptions import MoveTargetOutOfBoundsException
+from selenium.common.exceptions import ElementNotSelectableException
+from selenium.common.exceptions import ElementNotVisibleException
+from selenium.common.exceptions import InvalidCookieDomainException
+from selenium.common.exceptions import InvalidElementStateException
+from selenium.common.exceptions import InvalidSelectorException
+from selenium.common.exceptions import ImeNotAvailableException
+from selenium.common.exceptions import ImeActivationFailedException
+from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchFrameException
+from selenium.common.exceptions import NoSuchWindowException
+from selenium.common.exceptions import StaleElementReferenceException
+from selenium.common.exceptions import UnableToSetCookieException
+from selenium.common.exceptions import UnexpectedAlertPresentException
+from selenium.common.exceptions import NoAlertPresentException
+from selenium.common.exceptions import ErrorInResponseException
+from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import WebDriverException
+from selenium.common.exceptions import MoveTargetOutOfBoundsException
 
 try:
     basestring
@@ -78,11 +78,11 @@ class ErrorHandler(object):
     def check_response(self, response):
         """
         Checks that a JSON response from the WebDriver does not have an error.
-
+        
         :Args:
          - response - The JSON response from the WebDriver server as a dictionary
            object.
-
+        
         :Raises: If the response contains an error message.
         """
         status = response['status']

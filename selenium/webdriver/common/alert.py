@@ -17,18 +17,18 @@
 The Alert implementation.
 """
 
-from BrowserIntegration.selenium.webdriver.remote.command import Command
+from selenium.webdriver.remote.command import Command
 
 
 class Alert(object):
     """
     Allows to work with alerts.
 
-    Use this class to interact with alert prompts.  It contains methods for dismissing,
+    Use this class to interact with alert prompts.  It contains methods for dismissing, 
     accepting, inputting, and getting text from alert prompts.
 
     Accepting / Dismissing alert prompts::
-
+    
         Alert(driver).accept()
         Alert(driver).dismiss()
 
@@ -84,6 +84,6 @@ class Alert(object):
         :Args:
          - keysToSend: The text to be sent to Alert.
 
-
+        
         """
         self.driver.execute(Command.SET_ALERT_VALUE, {'text': keysToSend})
