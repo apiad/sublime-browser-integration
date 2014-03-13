@@ -25,8 +25,8 @@ under the `home` key (`localhost:8000` for a start).
 **Reload Chrome** (`ctrl+shift+b` `r`) does what it says, reloads Chrome.
 
 **Evaluate in Chrome** (`ctrl+shift+b` `e`) takes the selected JavaScript source
-and evaluates it in the Chrome instance, in the currently
-open tab.
+and evaluates it in the Chrome instance, in the currently open tab.
+If the code returns something, it will be opened in a new tab.
 
 **View load CSS (stylesheets)** (`ctrl+shift+b` `s`) open a quick panel with
 the `href`s of all stylesheets that are currently loaded in the active tab.
