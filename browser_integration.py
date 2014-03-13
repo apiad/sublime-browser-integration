@@ -143,9 +143,18 @@ class RunJavascriptInBrowserCommand(sublime_plugin.TextCommand):
 
                 s = self.view.substr(region)
                 status("Executing `%s`" % s)
-                chrome.execute_script(s)
+                result = chrome.execute_script(s)
+
+                if result is not None:
+                    view = sublime.active_window().new_file()
+                    view.run_command("insert_into_view", {"text": str(result)})
 
         run_javascript()
+
+
+class InsertIntoViewCommand(sublime_plugin.TextCommand):
+    def run(self, edit, text):
+        self.view.insert(edit, 0, text)
 
 
 select_js = """
