@@ -5,5 +5,6 @@
     { "caption": "Browser Integration: Highlight in Chrome", "command": "highlight_in_browser" },
     { "caption": "Browser Integration: Click selected elements", "command": "click_selected_elements_in_browser" },
     { "caption": "Browser Integration: Type into selected elements", "command": "type_selected_elements_in_browser" },
+    { "caption": "Browser Integration: View loaded style sheets (css)", "command": "view_loaded_style_sheets" },
     { "caption": "Browser Integration: Go to URL", "command": "go_to_url" }
 ]

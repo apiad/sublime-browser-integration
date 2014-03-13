@@ -17,6 +17,9 @@
   "keys": ["ctrl+shift+b", "t"],
   "command": "type_selected_elements_in_browser"
 }, {
+  "keys": ["ctrl+shift+b", "s"],
+  "command": "view_loaded_style_sheets"
+}, {
   "keys": ["ctrl+shift+b", "e"],
   "command": "run_javascript_in_browser"
 }]
