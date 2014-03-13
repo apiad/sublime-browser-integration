@@ -123,7 +123,7 @@ class GoToUrlCommand(sublime_plugin.WindowCommand):
             chrome.get(str)
             status("Loaded %s" % str)
 
-        self.window.show_input_panel('Enter URL', setting('home', self),
+        self.window.show_input_panel('Enter URL', chrome.current_url,
                                      onDone, None, None)
 
 
