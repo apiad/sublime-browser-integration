@@ -5,7 +5,7 @@ import sys
 import threading
 import time
 
-sys.path.append(os.path.dirname(os.path.basename(__file__)))
+sys.path.append(os.path.dirname(__file__))
 
 from .selenium.webdriver import Chrome
 
