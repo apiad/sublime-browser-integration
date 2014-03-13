@@ -28,6 +28,11 @@ under the `home` key (`localhost:8000` for a start).
 and evaluates it in the Chrome instance, in the currently
 open tab.
 
+**View load CSS (stylesheets)** (`ctrl+shift+b` `s`) open a quick panel with
+the `href`s of all stylesheets that are currently loaded in the active tab.
+Selecting one of the entries attempts to download and open the corresponding
+file in a new tab in Sublime.
+
 **Highlight in Chrome** (`ctrl+shift+b` `h`) opens a tiny input box, where you
 can type any valid CSS selector. Matching items are highlighted
 in the Chrome instance as you type, and stay highlighted
