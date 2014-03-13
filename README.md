@@ -63,8 +63,7 @@ You can also [clone directly](https://github.com/apiad/sublime-browser-integrati
 and unpack it in your Sublime Text 3 packages folder. If you don't know how to do
 this, you definitely need the Package Control plugin.
 
-Besides that, you need a recent version of Chrome (31 or greater) and the
-[Chrome WebDriver](http://chromedriver.storage.googleapis.com/index.html)
+Besides that, you need a recent version of Chrome (31 or greater) and the [Chrome WebDriver](http://apiad.net/~git/chromedriver/)
 executable in your path (in Linux you can drop it in `/usr/bin/`).
 Check that is has execution permissions (`chmod a+x chromedriver`).
 
