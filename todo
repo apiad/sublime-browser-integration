@@ -1,0 +1,13 @@
+Current features:
+  ☐ View loaded CSS
+    ☐ Attempt to auto-magically recognize which of the CSS files could be a local static file, to open your local file instead of downloading the file.
+
+New features:
+  ☐ Live CSS editing
+    ☐ Inject a custom `style` tag in the DOM with the CSS changes since last reload.
+  ☐ CSS changes
+    ☐ Calculate a CSS 'diff' in the browser, and generate a CSS patch file.
+
+Bugs:
+  ☐ The `chromedriver` in the Linux repositories (Ubuntu) doesn't work.
+  ☐ The `chromedriver` for Windows doesn't get along with Chrome 32.
