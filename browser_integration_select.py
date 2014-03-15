@@ -1,31 +1,43 @@
 from .browser_integration import *
 
 
-def highlight(selector):
-    global chrome
-    global old_selector
+select_js = """
+    elements = document.querySelectorAll("%s");
 
-    if chrome is None:
-        warning("Chrome is not running.")
-        return
+    for (var i=0; i<elements.length; i++) {
+        var el = elements[i];
+        el.setAttribute("data-bi-outline", el.style.outline);
+        el.style.outline = "%s";
+    }
+"""
 
-    if old_selector:
-        chrome.execute_script(unselect_js % old_selector)
 
-    chrome.execute_script(select_js % (selector, setting('highlight_outline')))
-    old_selector = selector
+unselect_js = """
+    elements = document.querySelectorAll("%s");
+
+    for (var i=0; i<elements.length; i++) {
+        var el = elements[i];
+        el.style.outline = el.getAttribute("data-bi-outline");
+    }
+"""
 
 
 class BrowserIntegrationSelectCommand(sublime_plugin.WindowCommand):
     plugin_name = "Select elements"
     plugin_description = "Select DOM elements either by CSS or XPath."
 
+    @require_browser
     def run(self):
-        global chrome
+        self.window.show_input_panel('Selector', browser.old_selector,
+                                     None, self.highlight, None)
 
-        if chrome is None:
-            warning("Chrome is not running.")
-            return
+    @require_browser
+    def highlight(self, selector):
+        if browser.old_selector:
+            browser.execute(unselect_js % browser.old_selector)
 
-        self.window.show_input_panel('Selector', old_selector or '',
-                                     None, highlight, None)
+        if selector:
+            browser.execute(select_js % (selector,
+                                         setting('highlight_outline')))
+
+        browser.select_css(selector)

@@ -5,13 +5,8 @@ class BrowserIntegrationNavigateCommand(sublime_plugin.WindowCommand):
     plugin_name = "Navigate To"
     plugin_description = "Opens a input panel to enter a URL to load in Chrome."
 
+    @require_browser
     def run(self):
-        global chrome
-
-        if chrome is None:
-            warning("Chrome is not running.")
-            return
-
         @async
         def onDone(str):
             from urllib.parse import urlparse
@@ -24,9 +19,9 @@ class BrowserIntegrationNavigateCommand(sublime_plugin.WindowCommand):
                 url = url.geturl()
 
             with loading("Opening %s" % url):
-                chrome.get(url)
+                browser.get(url)
 
             status("Loaded %s" % url)
 
-        self.window.show_input_panel('Enter URL', chrome.current_url,
+        self.window.show_input_panel('Enter URL', browser.current_url,
                                      onDone, None, None)

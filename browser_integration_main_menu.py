@@ -13,7 +13,7 @@ from .browser_integration_type import *
 
 class BrowserIntegrationMainMenuCommand(sublime_plugin.ApplicationCommand):
     def run(self):
-        if chrome is None:
+        if not browser.connected():
             main_menu_commands = [
                 BrowserIntegrationLaunchCommand,
             ]
@@ -27,7 +27,7 @@ class BrowserIntegrationMainMenuCommand(sublime_plugin.ApplicationCommand):
                 BrowserIntegrationSourceCommand,
             ]
 
-            if old_selector:
+            if browser.old_selector:
                 main_menu_commands.extend([
                     BrowserIntegrationClickCommand,
                     BrowserIntegrationTypeCommand,

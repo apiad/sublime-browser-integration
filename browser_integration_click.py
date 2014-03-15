@@ -1,26 +1,22 @@
-from browser_integration import *
+from .browser_integration import *
+from .browser_integration_select import *
 
 
 class BrowserIntegrationClickCommand(sublime_plugin.WindowCommand):
     plugin_name = "Click elements"
     plugin_description = "Click currently selected items in the browser."
 
+    @require_browser
     def run(self):
-        global chrome
-
-        if chrome is None:
-            warning("Chrome is not running.")
-            return
-
-        if not old_selector:
+        if not browser.selected_items:
             warning("No items are currently selected.")
             return
 
         @async
         def click():
-            status('Clicking all selected items')
+            status('Clicking all selected items.')
 
-            for e in chrome.find_elements_by_css_selector(old_selector):
+            for e in browser.selected_items:
                 e.click()
 
         click()

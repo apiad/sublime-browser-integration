@@ -7,9 +7,22 @@ import time
 
 sys.path.append(os.path.dirname(__file__))
 
+from .browser import Browser
 
 SETTINGS_FILE = 'BrowserIntegration.sublime-settings'
-chrome = None
+
+browser = Browser()
+
+
+def require_browser(function):
+    def wrapper(*args, **kwargs):
+        if not browser.connected():
+            warning("The browser is not open (or detached).")
+            return
+
+        return function(*args, **kwargs)
+
+    return wrapper
 
 
 def async(function):
@@ -113,31 +126,9 @@ def install_chromedriver():
                 os.chmod(bin_path, 511)
 
 
-install_chromedriver()
-
-
 class InsertIntoViewCommand(sublime_plugin.TextCommand):
     def run(self, edit, text):
         self.view.insert(edit, 0, text)
 
 
-select_js = """
-    elements = document.querySelectorAll("%s");
-
-    for (var i=0; i<elements.length; i++) {
-        var el = elements[i];
-        el.setAttribute("data-bi-outline", el.style.outline);
-        el.style.outline = "%s";
-    }
-"""
-
-unselect_js = """
-    elements = document.querySelectorAll("%s");
-
-    for (var i=0; i<elements.length; i++) {
-        var el = elements[i];
-        el.style.outline = el.getAttribute("data-bi-outline");
-    }
-"""
-
-old_selector = None
+install_chromedriver()
