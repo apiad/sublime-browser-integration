@@ -1,13 +1,13 @@
 # Browser Integration
 
-A Sublime Text 3 plugin for interacting with the browser and do web development related tasks.
+A Sublime Text 3 plugin for interacting with the browser and perform web development related tasks.
 
 
 ### Disclaimer:
 
 This plugin is in development state, which means is unstable, and it might not work in your system. It **should** work with *Google Chrome* and *Chromium Browser* versions 31 to 34, on modern versions of Linux, MacOSX and Windows, **but** it has only been tested so far with:
 
-* Ubuntu Linux 13.10 + ST3 + Chrome 31
+* Ubuntu Linux 13.10 + ST3 (3059) + Chrome 31
 
 Current iterations are constantly changing the names, key bindings, and semantics of most commands, so every time you upgrade something will likely not work the way it used to. Sorry for the inconvenience, I'm working as hard as possible to get a stable version out, but it will take me some time...
 
@@ -54,28 +54,57 @@ When first run, it will only show one command: **Launch Browser**. This is a nec
 **Key binding:** `ctrl+shift+b,l`
 
 Opens a new Google Chrome instance. All other browser commands require this one to be called first, and will complain (in your status bar) if Chrome is not open, or if the plugin has lost the connection somehow.
+
 After the browser has been opened, the main menu will show more commands. You can directly interact with the opened browser, create new tabs, click in stuff, etc. However, only the first opened tab will be controlled by the plugin, and if closed, connection will be lost and you'll need to launch the browser again. A browser instance can only be controlled if opened through this command, it will not work with an already opened browser.
 
-After opening the browser, it will navigate automatically to your configured starting page. This can changed in the default configuration, under the `home` settings.
+After opening the browser, it will navigate automatically to your configured starting page. This can changed in the default configuration, under the `startup_location` settings.
 
-### Other
+### Reload
 
-**Go To URL** (`ctrl+shift+b` `g`) tells Chrome to navigate to a new URL. By default, it open the one specified in the plugin settings, under the `home` key (`localhost:8000` for a start).
+**Key binding:** `ctrl-shift+b,r`
 
-**Reload Chrome** (`ctrl+shift+b` `r`) does what it says, reloads Chrome.
+Reloads the browser. You can configure the `reload_on_save` setting to automatically invoke this command upon save. The `reload_on_save_selector` contains a list of regular expressions. Every time you save a file, if its filename matches any of the regular expressions, the browser will be reloaded. By default this options are set so to reload upon saving any HTML, CSS or JavaScript file.
 
-**Evaluate in Chrome** (`ctrl+shift+b` `e`) takes the selected JavaScript source and evaluates it in the Chrome instance, in the currently open tab. If the code returns something, it will be opened in a new tab.
+### Navigate To
 
-**View load CSS (stylesheets)** (`ctrl+shift+b` `s`) open a quick panel with the `href`s of all stylesheets that are currently loaded in the active tab. Selecting one of the entries attempts to download and open the corresponding file in a new tab in Sublime.
+**Key binding:** `ctrl+shift+b,n`
 
-**Highlight in Chrome** (`ctrl+shift+b` `h`) opens a tiny input box, where you can type any valid CSS selector. Matching items are highlighted in the Chrome instance as you type, and stay highlighted
-after you close.
+Opens an input panel to enter a URL, to force the browser to navigate to it. The currently loaded URL is already selected in the input panel. If you don't type a valid locator (`http`, `https`, etc.), then `http://` is appended to the URL.
 
-These highlighted elements can be used in other commands, to make specific DOM manipulations:
+### Execute selected code
 
-**Click selected elements** (`ctrl+shift+b` `c`) clicks all elements previously selected.
+**Key binding:** `ctrl+shift+b,e`
 
-**Type into selected elements** (`ctrl+shift+b` `t`) opens an input box to type into the previously selected elements.
+Takes the selected JavaScript source and runs it in the browser. If the code returns something, it will be opened in a new tab. This is done independently for every selected region, and will open as many tabs as necessary, for every selected piece of script that returns something.
+
+### View load CSS (stylesheets)
+
+**Key binding:** `ctrl+shift+b,c`
+
+Opens a quick panel with the list of all stylesheets that are currently loaded in the browser. Imported stylesheets (`link` tags) are listed by URL. Embedded stylesheets (`style` tags) are listed independently, with a small preview of the style code. Upon selecting one of the entries, a new tab is openned with the content of the stylesheet. If it was an imported stylesheet, the command will attempt to download the `link` tag's `href` property, and open it in a new tag. If it was embedded, the command will copy the `innerHTML` property of the `style` tag, and paste it in a new tab.
+
+Right now I'm working on a feature to allow the specification of mappings between URLs and local files, so that the command can identify which URLs are local static files, and load those files instead of downloading the stylesheets.
+
+### Select elements
+
+**Key binding:** `ctrl+shift+b,s`
+
+Opens an input box, where you can type any valid CSS selector. Matching items are highlighted in the browser instance as you type, and stay highlighted after you close. These selected elements can be used in other commands, to make specific DOM manipulations. To unselect, launch the command again, and clear the input panel.
+
+### Click selected elements
+
+**Key binding:** `ctrl+shift+b,c`
+
+If you have previously selected any items, this command send a click to selected elements. It will only appear in the main menu if there are selected items.
+
+### Type into selected items
+
+**Key binding:** `ctrl+shift+b,t`
+
+If you have previously selected any items, this command opens an input box to type a text, that will be sent to the browser and typed into the selected elements. It will only appear in the main menu if there are selected items.
+
+
+## Task automation
 
 With these commands in combination you can easily automatize boring tasks. For instance, every time I work on my site's project, I open ST3, start my development server, open Chrome, navigate to `localhost:9090`, type in my credentials, and then I can start developing.
 
@@ -106,3 +135,5 @@ Sure, come to [Github](https://github.com/apiad/sublime-browser-integration).
 There are many ways to collaborate: just by trying it out and filling up any issues, it will be of great help. It's very hard to develop a multi-platform Sublime Text plugin, specially when you have to deal with different implementations of browsers, and I can not possible test every combination of Sublime Text + Chrome + OS out there, so beta testing is the most precious help you can offer.
 
 If you want to put some code into the plugin, then even better! As usual, fork it, and make your pull request. I'm eager to see what other awesome developers like you come up with... ;)
+
+You can also suggest changes, features, and any interesting idea.
