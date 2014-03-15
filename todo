@@ -14,3 +14,6 @@ New features:
 Bugs:
   ☐ The `chromedriver` in the Linux repositories (Ubuntu) doesn't work.
   ☐ The `chromedriver` for Windows doesn't get along with Chrome 32.
+
+General:
+  ☐ Refactor all code into different .py files and classes.
