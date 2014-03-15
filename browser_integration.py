@@ -135,9 +135,14 @@ class BrowserIntegrationLaunchCommand(sublime_plugin.ApplicationCommand):
             with loading("Opening Chrome new instance."):
                 local_chrome = Chrome(os.path.join(os.path.dirname(__file__),
                                                    'chromedriver'))
-            home = setting('home', self)
+                if setting('maximize_on_startup', self):
+                    local_chrome.maximize_window()
+
+            home = setting('startup_location', self)
+
             with loading("Loading %s" % home):
                 local_chrome.get(home)
+
             status("Chrome is up and running!")
             chrome = local_chrome
 
@@ -252,7 +257,7 @@ def highlight(selector):
     if old_selector:
         chrome.execute_script(unselect_js % old_selector)
 
-    chrome.execute_script(select_js % (selector, setting('highlight-overlay')))
+    chrome.execute_script(select_js % (selector, setting('highlight_outline')))
     old_selector = selector
 
 
@@ -369,6 +374,23 @@ class BrowserIntegrationStylesheetsCommand(sublime_plugin.ApplicationCommand):
         view_css()
 
 
+class BrowserIntegrationSourceCommand(sublime_plugin.ApplicationCommand):
+    plugin_name = 'View page source'
+    plugin_description = "Open the page source in a new tab."
+
+    @async
+    def run(self):
+        if chrome is None:
+            warning("Chrome instance not running.")
+            return
+
+        source = chrome.page_source
+        view = sublime.active_window().new_file()
+        view.set_name(chrome.current_url)
+        view.set_syntax_file('Packages/HTML/HTML.tmLanguage')
+        view.run_command("insert_into_view", {"text": source})
+
+
 class BrowserIntegrationMainMenuCommand(sublime_plugin.ApplicationCommand):
     def run(self):
         if chrome is None:
@@ -382,6 +404,7 @@ class BrowserIntegrationMainMenuCommand(sublime_plugin.ApplicationCommand):
                 BrowserIntegrationExecuteCommand,
                 BrowserIntegrationStylesheetsCommand,
                 BrowserIntegrationSelectCommand,
+                BrowserIntegrationSourceCommand,
             ]
 
             if old_selector:

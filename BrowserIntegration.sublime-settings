@@ -1,4 +1,9 @@
 {
-    "home": "localhost:8000",
-    "highlight-overlay": "2px solid red"
+    // The default location to open when firing up the browser
+    "startup_location": "localhost:8000",
+    // Whether to maximize the browser window on startup
+    "maximize_on_startup": true,
+    // This style will be applied to the `outline` property
+    // of selected items (Select with CSS or XPath command)
+    "highlight_outline": "2px solid red"
 }
