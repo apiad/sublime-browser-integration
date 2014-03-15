@@ -6,5 +6,12 @@
     {
         "caption": "Browser Integration: Launch Browser",
         "command": "browser_integration_launch"
+    },
+    {
+        "command": "open_file",
+        "args": {
+            "file": "${packages}/BrowserIntegration/BrowserIntegration.sublime-settings"
+        },
+        "caption": "Browser Integration: Settings (Default)"
     }
 ]

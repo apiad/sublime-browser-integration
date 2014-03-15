@@ -1,0 +1,20 @@
+[{
+    "caption": "Preferences",
+    "mnemonic": "n",
+    "id": "preferences",
+    "children": [{
+        "caption": "Package Settings",
+        "mnemonic": "P",
+        "id": "package-settings",
+        "children": [{
+            "caption": "BrowserIntegration",
+            "children": [{
+                "command": "open_file",
+                "args": {
+                    "file": "${packages}/BrowserIntegration/BrowserIntegration.sublime-settings"
+                },
+                "caption": "Settings – Default"
+            }]
+        }]
+    }]
+}]
