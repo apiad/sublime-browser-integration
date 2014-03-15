@@ -89,20 +89,29 @@ Right now I'm working on a feature to allow the specification of mappings betwee
 
 **Key binding:** `ctrl+shift+b,s`
 
-Opens an input box, where you can type any valid CSS selector. Matching items are highlighted in the browser instance as you type, and stay highlighted after you close. These selected elements can be used in other commands, to make specific DOM manipulations. To unselect, launch the command again, and clear the input panel.
+Opens an input box, where you can type any valid CSS selector. Matching items are highlighted in the browser as you type, and stay highlighted after you close. These selected elements can be used in other commands, to make specific DOM manipulations. To unselect, launch the command again, and clear the input panel.
+
+### Modify DOM elements
+
+If you have previously selected any DOM elements, the following commands will allow you to make modifications to those elements. These commands will only appear in the main menu if you have selected elements.
 
 ### Click selected elements
 
-**Key binding:** `ctrl+shift+b,c`
+**Key binding:** `ctrl+shift+b,d,c`
 
-If you have previously selected any items, this command send a click to selected elements. It will only appear in the main menu if there are selected items.
+Sends a click to selected elements.
 
-### Type into selected items
+### Type into selected elements
 
-**Key binding:** `ctrl+shift+b,t`
+**Key binding:** `ctrl+shift+b,d,t`
 
-If you have previously selected any items, this command opens an input box to type a text, that will be sent to the browser and typed into the selected elements. It will only appear in the main menu if there are selected items.
+Opens an input box to type a text, that will be sent to the browser and typed into the selected elements.
 
+### Change selected elements class
+
+**Key binding:** `ctrl+shift+b,d,s`
+
+Open an input box with the value of the `class` attribute of selected elements. If there are more than one selected element, with different classes, the input box will show the union of the elements `class` attributes. Typing into the input panel will update the selected elements `class` attribute in real-time.
 
 ## Task automation
 

@@ -1,5 +1,4 @@
 from .browser_integration import *
-from .browser_integration_select import *
 
 
 class BrowserIntegrationTypeCommand(sublime_plugin.WindowCommand):

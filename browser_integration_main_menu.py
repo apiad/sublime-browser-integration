@@ -9,6 +9,7 @@ from .browser_integration_select import *
 from .browser_integration_source import *
 from .browser_integration_click import *
 from .browser_integration_type import *
+from .browser_integration_class import *
 
 
 class BrowserIntegrationMainMenuCommand(sublime_plugin.ApplicationCommand):
@@ -31,6 +32,7 @@ class BrowserIntegrationMainMenuCommand(sublime_plugin.ApplicationCommand):
                 main_menu_commands.extend([
                     BrowserIntegrationClickCommand,
                     BrowserIntegrationTypeCommand,
+                    BrowserIntegrationClassCommand,
                 ])
 
         def select_command(i):
