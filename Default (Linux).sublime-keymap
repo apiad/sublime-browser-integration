@@ -1,25 +1,7 @@
 [{
-  "keys": ["ctrl+shift+b", "l"],
-  "command": "open_browser"
+  "keys": ["ctrl+alt+shift+b"],
+  "command": "browser_integration_main_menu"
 }, {
-  "keys": ["ctrl+shift+b", "g"],
-  "command": "go_to_url"
-}, {
-  "keys": ["ctrl+shift+b", "r"],
-  "command": "reload_browser"
-}, {
-  "keys": ["ctrl+shift+b", "h"],
-  "command": "highlight_in_browser"
-}, {
-  "keys": ["ctrl+shift+b", "c"],
-  "command": "click_selected_elements_in_browser"
-}, {
-  "keys": ["ctrl+shift+b", "t"],
-  "command": "type_selected_elements_in_browser"
-}, {
-  "keys": ["ctrl+shift+b", "s"],
-  "command": "view_loaded_style_sheets"
-}, {
-  "keys": ["ctrl+shift+b", "e"],
-  "command": "run_javascript_in_browser"
+  "keys": ["ctrl+shift+b","l"],
+  "command": "browser_integration_launch"
 }]

@@ -7,6 +7,9 @@ New features:
     ☐ Inject a custom `style` tag in the DOM with the CSS changes since last reload.
   ☐ CSS changes
     ☐ Calculate a CSS 'diff' in the browser, and generate a CSS patch file.
+  ☐ Menus
+    ☐ Add a fully navigable menu for all commands, with key bindings.
+  ☐ Download `chromedriver` automatically from `sublime.apiad.net`.
 
 Bugs:
   ☐ The `chromedriver` in the Linux repositories (Ubuntu) doesn't work.

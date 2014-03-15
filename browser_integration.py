@@ -42,34 +42,57 @@ def setting(setting, cmd=None, default=None):
 
 
 def status(msg):
-    sublime.status_message("BrowserIntegration :: %s" % msg)
+    sublime.status_message("Browser Integration :: %s" % msg)
 
 
 def warning(msg):
-    sublime.status_message("(!) BrowserIntegration :: %s" % msg)
+    sublime.status_message("(!) Browser Integration :: %s" % msg)
 
 
-@async
-def loading(msg, delay=1):
-    start = time.time()
-    count = 0
-    up = True
+class Loader:
+    def __init__(self, msg):
+        self.msg = msg
+        self.stop = False
 
-    while time.time() - start < delay:
-        load = "[" + " " * count + "=" + " " * (5 - count) + "]"
-        sublime.status_message(load + " BrowserInteration :: " + msg)
-        time.sleep(0.1)
-        if up:
-            count += 1
-            if count == 5:
-                up = False
-        else:
-            count -= 1
-            if count == 0:
-                up = True
+    def __enter__(self):
+        self.run()
+
+    def __exit__(self, _type, _value, _traceback):
+        self.stop = True
+
+    @async
+    def run(self):
+        count = 0
+        up = True
+
+        while not self.stop:
+            load = "[" + " " * count + "=" + " " * (5 - count) + "]"
+            sublime.status_message(load + " Browser Integration :: " + self.msg)
+            time.sleep(0.1)
+            if up:
+                count += 1
+                if count >= 5:
+                    up = False
+            else:
+                count -= 1
+                if count <= 0:
+                    up = True
+
+        sublime.status_message("")
 
 
-class OpenBrowserCommand(sublime_plugin.ApplicationCommand):
+def loading(msg):
+    return Loader(msg)
+
+
+def plugin_loaded():
+    pass
+
+
+class BrowserIntegrationLaunchCommand(sublime_plugin.ApplicationCommand):
+    plugin_name = "Launch Browser"
+    plugin_description = "Launches a new browser instance."
+
     def run(self):
         global chrome
 
@@ -82,18 +105,21 @@ class OpenBrowserCommand(sublime_plugin.ApplicationCommand):
         def open_chrome():
             global chrome
 
-            loading("Opening Chrome new instance.")
-            local_chrome = Chrome()
+            with loading("Opening Chrome new instance."):
+                local_chrome = Chrome()
             home = setting('home', self)
-            loading("Loading %s" % home)
-            local_chrome.get(home)
+            with loading("Loading %s" % home):
+                local_chrome.get(home)
             status("Chrome is up and running!")
             chrome = local_chrome
 
         open_chrome()
 
 
-class ReloadBrowserCommand(sublime_plugin.ApplicationCommand):
+class BrowserIntegrationReloadCommand(sublime_plugin.ApplicationCommand):
+    plugin_name = "Reload"
+    plugin_description = "Reloads the current tab."
+
     def run(self):
         global chrome
 
@@ -103,13 +129,16 @@ class ReloadBrowserCommand(sublime_plugin.ApplicationCommand):
 
         @async
         def refresh_browser():
-            status("Refreshing browser")
-            chrome.refresh()
+            with loading("Refreshing browser"):
+                chrome.refresh()
 
         refresh_browser()
 
 
-class GoToUrlCommand(sublime_plugin.WindowCommand):
+class BrowserIntegrationNavigateCommand(sublime_plugin.WindowCommand):
+    plugin_name = "Navigate To"
+    plugin_description = "Opens a input panel to enter a URL to load in Chrome."
+
     def run(self):
         global chrome
 
@@ -119,15 +148,18 @@ class GoToUrlCommand(sublime_plugin.WindowCommand):
 
         @async
         def onDone(str):
-            status("Opening %s" % str)
-            chrome.get(str)
+            with loading("Opening %s" % str):
+                chrome.get(str)
             status("Loaded %s" % str)
 
         self.window.show_input_panel('Enter URL', chrome.current_url,
                                      onDone, None, None)
 
 
-class RunJavascriptInBrowserCommand(sublime_plugin.TextCommand):
+class BrowserIntegrationExecuteCommand(sublime_plugin.TextCommand):
+    plugin_name = "Execute selected code"
+    plugin_description = "Executes selected JavaScript code in the browser."
+
     def run(self, edit):
         global chrome
 
@@ -147,6 +179,8 @@ class RunJavascriptInBrowserCommand(sublime_plugin.TextCommand):
 
                 if result is not None:
                     view = sublime.active_window().new_file()
+                    view.set_syntax_file(
+                        "Packages/JavaScript/JavaScript.tmLanguage")
                     view.run_command("insert_into_view", {"text": str(result)})
 
         run_javascript()
@@ -194,7 +228,10 @@ def highlight(selector):
     old_selector = selector
 
 
-class HighlightInBrowserCommand(sublime_plugin.WindowCommand):
+class BrowserIntegrationSelectCommand(sublime_plugin.WindowCommand):
+    plugin_name = "Select elements"
+    plugin_description = "Select DOM elements either by CSS or XPath."
+
     def run(self):
         global chrome
 
@@ -206,7 +243,10 @@ class HighlightInBrowserCommand(sublime_plugin.WindowCommand):
                                      None, highlight, None)
 
 
-class ClickSelectedElementsInBrowser(sublime_plugin.WindowCommand):
+class BrowserIntegrationClickCommand(sublime_plugin.WindowCommand):
+    plugin_name = "Click elements"
+    plugin_description = "Click currently selected items in the browser."
+
     def run(self):
         global chrome
 
@@ -228,7 +268,10 @@ class ClickSelectedElementsInBrowser(sublime_plugin.WindowCommand):
         click()
 
 
-class TypeSelectedElementsInBrowser(sublime_plugin.WindowCommand):
+class BrowserIntegrationTypeCommand(sublime_plugin.WindowCommand):
+    plugin_name = "Type into selected elements"
+    plugin_description = "Opens an input panel to type text into selected items."
+
     def run(self):
         global chrome
 
@@ -264,6 +307,9 @@ get_css_hrefs_js = """
 
 
 class ViewLoadedStyleSheetsCommand(sublime_plugin.ApplicationCommand):
+    plugin_name = "View loaded CSS (stylesheets)"
+    plugin_description = "Lists all loaded stylesheets in the current active tab."
+
     def run(self):
         global chrome
 
@@ -293,3 +339,44 @@ class ViewLoadedStyleSheetsCommand(sublime_plugin.ApplicationCommand):
                 status("There are no CSS style sheets loaded.")
 
         view_css()
+
+
+class BrowserIntegrationMainMenuCommand(sublime_plugin.ApplicationCommand):
+    def run(self):
+        main_menu_commands = [
+            BrowserIntegrationLaunchCommand,
+            BrowserIntegrationReloadCommand,
+            BrowserIntegrationExecuteCommand,
+            BrowserIntegrationSelectCommand,
+            BrowserIntegrationClickCommand,
+            BrowserIntegrationTypeCommand,
+        ]
+
+        def select_command(i):
+            if i < 0:
+                return
+
+            cls = main_menu_commands[i]
+            cmd = command_str(cls)
+
+            if issubclass(cls, sublime_plugin.ApplicationCommand):
+                sublime.run_command(cmd)
+            elif issubclass(cls, sublime_plugin.WindowCommand):
+                sublime.active_window().run_command(cmd)
+            elif issubclass(cls, sublime_plugin.TextCommand):
+                sublime.active_window().active_view().run_command(cmd)
+
+        def command_str(cls):
+            name = cls.__name__
+            return "browser_integration_" + name[18:-7].lower()
+
+        def command_name(cls):
+            return cls.plugin_name
+
+        def command_description(cls):
+            return cls.plugin_description
+
+        sublime.active_window().show_quick_panel([
+            [command_name(cls), command_description(cls)]
+            for cls in main_menu_commands
+        ], select_command)
