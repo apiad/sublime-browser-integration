@@ -137,6 +137,11 @@ class BrowserIntegrationLaunchCommand(sublime_plugin.ApplicationCommand):
                                                    'chromedriver'))
                 if setting('maximize_on_startup', self):
                     local_chrome.maximize_window()
+                else:
+                    x, y = setting('window_position', self)
+                    w, h = setting('window_size', self)
+                    local_chrome.set_window_position(x, y)
+                    local_chrome.set_window_size(w, h)
 
             home = setting('startup_location', self)
 
@@ -386,7 +391,7 @@ class BrowserIntegrationSourceCommand(sublime_plugin.ApplicationCommand):
 
         source = chrome.page_source
         view = sublime.active_window().new_file()
-        view.set_name(chrome.current_url)
+        view.set_name(chrome.title)
         view.set_syntax_file('Packages/HTML/HTML.tmLanguage')
         view.run_command("insert_into_view", {"text": source})
 

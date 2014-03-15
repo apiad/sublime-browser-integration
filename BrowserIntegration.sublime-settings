@@ -2,7 +2,15 @@
     // The default location to open when firing up the browser
     "startup_location": "localhost:8000",
     // Whether to maximize the browser window on startup
-    "maximize_on_startup": true,
+    "maximize_on_startup": false,
+    // If `maximize_on_startup` is false, the browser window will
+    // be moved to this position on startup ([x, y])
+    "window_position": [0, 0],
+    // If `maximize_on_startup` is false, the browser window will
+    // be set to this size on startup ([width, height]).
+    // Useful if you want to open ST3 and the browser alongside
+    // in the same monitor.
+    "window_size": [480, 780],
     // This style will be applied to the `outline` property
     // of selected items (Select with CSS or XPath command)
     "highlight_outline": "2px solid red"
