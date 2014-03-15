@@ -85,8 +85,37 @@ def loading(msg):
     return Loader(msg)
 
 
-def plugin_loaded():
-    pass
+@async
+def install_chromedriver():
+    if sublime.platform() == 'linux':
+        if sublime.arch() == 'x32':
+            dl_path = 'chromedriver-linux-32'
+        elif sublime.arch() == 'x64':
+            dl_path = 'chromedriver-linux-64'
+    elif sublime.platform() == 'windows':
+        dl_path = 'chromedriver-windows'
+    elif sublime.platform() == 'osx':
+        dl_path = 'chromedriver-osx'
+
+    bin_name = 'chromedriver'
+    bin_folder = os.path.dirname(__file__)
+    bin_path = os.path.join(bin_folder, bin_name)
+
+    dl_path = 'http://sublime.apiad.net/browser-integration/'\
+              'chromedriver/%s' % dl_path
+
+    if not os.path.exists(bin_path):
+        with loading("Downloading chromedriver executable."):
+            from urllib.request import urlopen
+
+            with urlopen(dl_path) as response, open(bin_path, 'wb') as f:
+                f.write(response.read())
+
+            if sublime.platform() == 'linux':
+                os.chmod(bin_path, 511)
+
+
+install_chromedriver()
 
 
 class BrowserIntegrationLaunchCommand(sublime_plugin.ApplicationCommand):
@@ -106,7 +135,8 @@ class BrowserIntegrationLaunchCommand(sublime_plugin.ApplicationCommand):
             global chrome
 
             with loading("Opening Chrome new instance."):
-                local_chrome = Chrome()
+                local_chrome = Chrome(os.path.join(os.path.dirname(__file__),
+                                                   'chromedriver'))
             home = setting('home', self)
             with loading("Loading %s" % home):
                 local_chrome.get(home)
@@ -306,9 +336,9 @@ get_css_hrefs_js = """
 """
 
 
-class ViewLoadedStyleSheetsCommand(sublime_plugin.ApplicationCommand):
+class BrowserIntegrationStylesheetsCommand(sublime_plugin.ApplicationCommand):
     plugin_name = "View loaded CSS (stylesheets)"
-    plugin_description = "Lists all loaded stylesheets in the current active tab."
+    plugin_description = "Lists all loaded stylesheets."
 
     def run(self):
         global chrome
@@ -343,14 +373,20 @@ class ViewLoadedStyleSheetsCommand(sublime_plugin.ApplicationCommand):
 
 class BrowserIntegrationMainMenuCommand(sublime_plugin.ApplicationCommand):
     def run(self):
-        main_menu_commands = [
-            BrowserIntegrationLaunchCommand,
-            BrowserIntegrationReloadCommand,
-            BrowserIntegrationExecuteCommand,
-            BrowserIntegrationSelectCommand,
-            BrowserIntegrationClickCommand,
-            BrowserIntegrationTypeCommand,
-        ]
+        if chrome is None:
+            main_menu_commands = [
+                BrowserIntegrationLaunchCommand,
+            ]
+        else:
+            main_menu_commands = [
+                BrowserIntegrationReloadCommand,
+                BrowserIntegrationNavigateCommand,
+                BrowserIntegrationExecuteCommand,
+                BrowserIntegrationStylesheetsCommand,
+                BrowserIntegrationSelectCommand,
+                BrowserIntegrationClickCommand,
+                BrowserIntegrationTypeCommand,
+            ]
 
         def select_command(i):
             if i < 0:
