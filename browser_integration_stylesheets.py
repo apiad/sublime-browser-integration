@@ -36,7 +36,6 @@ class BrowserIntegrationStylesheetsCommand(sublime_plugin.ApplicationCommand):
     def run(self):
         @async
         def load_css(i):
-
             if i >= 0:
                 if (results[i][0].startswith('Embedded')):
                     text = browser.execute(get_embedded_css_text % i)
