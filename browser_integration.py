@@ -123,16 +123,14 @@ class BrowserIntegrationLaunchCommand(sublime_plugin.ApplicationCommand):
     plugin_description = "Launches a new browser instance."
 
     def run(self):
-        global chrome
-
-        if chrome is not None:
-            status("Shutting down Chrome instance.")
-            chrome.quit()
-            chrome = None
-
         @async
         def open_chrome():
             global chrome
+
+            if chrome is not None:
+                with loading("Shutting down Chrome instance."):
+                    chrome.quit()
+                    chrome = None
 
             with loading("Opening Chrome new instance."):
                 local_chrome = Chrome(os.path.join(os.path.dirname(__file__),
@@ -251,7 +249,7 @@ def highlight(selector):
         warning("Chrome is not running.")
         return
 
-    if old_selector is not None:
+    if old_selector:
         chrome.execute_script(unselect_js % old_selector)
 
     chrome.execute_script(select_js % (selector, setting('highlight-overlay')))
@@ -269,7 +267,7 @@ class BrowserIntegrationSelectCommand(sublime_plugin.WindowCommand):
             warning("Chrome is not running.")
             return
 
-        self.window.show_input_panel('Selector', '',
+        self.window.show_input_panel('Selector', old_selector or '',
                                      None, highlight, None)
 
 
@@ -300,7 +298,7 @@ class BrowserIntegrationClickCommand(sublime_plugin.WindowCommand):
 
 class BrowserIntegrationTypeCommand(sublime_plugin.WindowCommand):
     plugin_name = "Type into selected elements"
-    plugin_description = "Opens an input panel to type text into selected items."
+    plugin_description = "Opens an input panel to type text into the browser."
 
     def run(self):
         global chrome
@@ -384,9 +382,13 @@ class BrowserIntegrationMainMenuCommand(sublime_plugin.ApplicationCommand):
                 BrowserIntegrationExecuteCommand,
                 BrowserIntegrationStylesheetsCommand,
                 BrowserIntegrationSelectCommand,
-                BrowserIntegrationClickCommand,
-                BrowserIntegrationTypeCommand,
             ]
+
+            if old_selector:
+                main_menu_commands.extend([
+                    BrowserIntegrationClickCommand,
+                    BrowserIntegrationTypeCommand,
+                ])
 
         def select_command(i):
             if i < 0:
@@ -413,6 +415,6 @@ class BrowserIntegrationMainMenuCommand(sublime_plugin.ApplicationCommand):
             return cls.plugin_description
 
         sublime.active_window().show_quick_panel([
-            [command_name(cls), command_description(cls)]
+            [command_name(cls)] + command_description(cls).split("\n")
             for cls in main_menu_commands
         ], select_command)
