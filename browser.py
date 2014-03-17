@@ -17,7 +17,7 @@ class Browser:
         return self.webdriver is not None
 
     def connect(self):
-        self.webdriver = Chrome(os.path.join(os.path.dirname(__file__),
+        self.webdriver = Chrome(os.path.join(os.path.dirname(__file__), '..',
                                              'chromedriver'))
 
     def quit(self):

@@ -110,7 +110,7 @@ def install_chromedriver():
 
     bin_name = 'chromedriver'
     bin_folder = os.path.dirname(__file__)
-    bin_path = os.path.join(bin_folder, bin_name)
+    bin_path = os.path.join(bin_folder, '..', bin_name)
 
     dl_path = 'http://sublime.apiad.net/browser-integration/'\
               'chromedriver/%s' % dl_path
