@@ -11,6 +11,7 @@ class Browser:
         self.webdriver = None
         self.selected_items = []
         self.old_selector = ''
+        self.recording = False
 
     def connected(self):
         return self.webdriver is not None

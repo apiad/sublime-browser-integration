@@ -104,9 +104,9 @@ def install_chromedriver():
         elif sublime.arch() == 'x64':
             dl_path = 'chromedriver-linux-64'
     elif sublime.platform() == 'windows':
-        dl_path = 'chromedriver-windows'
+        dl_path = 'chromedriver-win-32'
     elif sublime.platform() == 'osx':
-        dl_path = 'chromedriver-osx'
+        dl_path = 'chromedriver-osx-32'
 
     bin_name = 'chromedriver'
     bin_folder = os.path.dirname(__file__)
@@ -122,7 +122,7 @@ def install_chromedriver():
             with urlopen(dl_path) as response, open(bin_path, 'wb') as f:
                 f.write(response.read())
 
-            if sublime.platform() == 'linux':
+            if sublime.platform() == 'linux' or sublime.platform() == 'osx':
                 os.chmod(bin_path, 511)
 
 

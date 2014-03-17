@@ -10,6 +10,9 @@ from .browser_integration_source import *
 from .browser_integration_click import *
 from .browser_integration_type import *
 from .browser_integration_class import *
+from .browser_integration_record import *
+from .browser_integration_stop import *
+from .browser_integration_play import *
 
 
 class BrowserIntegrationMainMenuCommand(sublime_plugin.ApplicationCommand):
@@ -27,6 +30,13 @@ class BrowserIntegrationMainMenuCommand(sublime_plugin.ApplicationCommand):
                 BrowserIntegrationSelectCommand,
                 BrowserIntegrationSourceCommand,
             ]
+
+            if not browser.recording:
+                main_menu_commands.append(BrowserIntegrationRecordCommand)
+            else:
+                main_menu_commands.append(BrowserIntegrationStopCommand)
+
+            main_menu_commands.append(BrowserIntegrationPlayCommand)
 
             if browser.old_selector:
                 main_menu_commands.extend([
