@@ -12,6 +12,7 @@ from .browser import Browser
 SETTINGS_FILE = 'BrowserIntegration.sublime-settings'
 
 browser = Browser()
+log_file = '/var/log/sublime-browser-integration.log'
 
 
 def require_browser(function):
@@ -33,6 +34,9 @@ def async(function):
             thread.start()
             return thread
         except Exception as e:
+            with open(log_file, 'a') as f:
+                f.write(str(e) + '\n')
+
             warning(str(e))
 
     return wrapper
@@ -110,12 +114,19 @@ def install_chromedriver():
 
     bin_name = 'chromedriver'
     bin_folder = os.path.dirname(__file__)
-    bin_path = os.path.join(bin_folder, '..', bin_name)
+    bin_path = os.path.abspath(os.path.join(bin_folder, '..', bin_name))
 
     dl_path = 'http://sublime.apiad.net/browser-integration/'\
               'chromedriver/%s' % dl_path
 
-    if not os.path.exists(bin_path):
+    if os.path.exists(bin_path):
+        print("Found `chromedriver` executable")
+        print("  in '%s'" % bin_path)
+    else:
+        print("Downloading `chromedriver` executable")
+        print("  from '%s'" % dl_path)
+        print("  into '%s'" % bin_path)
+
         with loading("Downloading chromedriver executable."):
             from urllib.request import urlopen
 
