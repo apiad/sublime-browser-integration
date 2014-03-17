@@ -8,6 +8,8 @@ from .selenium.webdriver import Chrome
 
 class Browser:
     def __init__(self):
+        print("Intializing BrowserIntegration instance.")
+
         self.webdriver = None
         self.selected_items = []
         self.old_selector = ''

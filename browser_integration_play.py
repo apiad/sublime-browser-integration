@@ -3,7 +3,7 @@ from .selenium.webdriver.common.action_chains import ActionChains
 
 
 class BrowserIntegrationPlayCommand(sublime_plugin.WindowCommand):
-    plugin_name = 'Play macro'
+    plugin_name = 'Play macro (experimental)'
     plugin_description = 'Play a previously recorded macro.'
 
     @require_browser

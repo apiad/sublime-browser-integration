@@ -85,6 +85,8 @@ Opens a quick panel with the list of all stylesheets that are currently loaded i
 
 Right now I'm working on a feature to allow the specification of mappings between URLs and local files, so that the command can identify which URLs are local static files, and load those files instead of downloading the stylesheets.
 
+Another incoming feature is the live editing of these CSS files, with automatic asynchronous browser reload, something I'm very excited of, but still trying to get to work.
+
 ### Select elements
 
 **Key binding:** `ctrl+shift+b,s`
@@ -113,11 +115,13 @@ Opens an input box to type a text, that will be sent to the browser and typed in
 
 Open an input box with the value of the `class` attribute of selected elements. If there are more than one selected element, with different classes, the input box will show the union of the elements `class` attributes. Typing into the input panel will update the selected elements `class` attribute in real-time.
 
-## Task automation
+## (Experimental) Task automation
 
 With these commands in combination you can easily automatize boring tasks. For instance, every time I work on my site's project, I open ST3, start my development server, open Chrome, navigate to `localhost:9090`, type in my credentials, and then I can start developing.
 
 Right now I'm working on a macro utility for the plugin, that will be available shortly. We need a special macro system, because most of these commands are asynchronous, and hence don't get along very well with the macro system integrated into Sublime.
+
+For the time being, you can record macros, save them, and play them again later. Right now the plugin only stores click events, and it doesn't work very well, so play with care. Select `Record macro` from the main menu, and then interact with the browser. Select `Stop recording macro` once done, a small input panel will pop out asking for a macro name. Enter a name and hit enter, and the macro data will be shown on a new file (its a JSON with all the evens information). Save it somewhere in your project, and when you later call `Play macro`, a small quick panel will show you all macros stored in your project (files with `.macro` extension).
 
 
 ## How does it work?

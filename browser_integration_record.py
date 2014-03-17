@@ -24,7 +24,7 @@ record_macro_js = """
 
 
 class BrowserIntegrationRecordCommand(sublime_plugin.WindowCommand):
-    plugin_name = "Record macro"
+    plugin_name = "Record macro (experimental)"
     plugin_description = "Start recording browser interaction."
 
     @require_browser

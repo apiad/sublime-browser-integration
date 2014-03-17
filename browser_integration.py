@@ -37,6 +37,7 @@ def async(function):
             with open(log_file, 'a') as f:
                 f.write(str(e) + '\n')
 
+            print(str(e))
             warning(str(e))
 
     return wrapper

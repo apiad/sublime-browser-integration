@@ -8,6 +8,10 @@
         "command": "browser_integration_launch"
     },
     {
+        "caption": "Browser Integration: Navigate To",
+        "command": "browser_integration_navigate"
+    },
+    {
         "command": "open_file",
         "args": {
             "file": "${packages}/BrowserIntegration/BrowserIntegration.sublime-settings"

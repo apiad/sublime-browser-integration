@@ -16,7 +16,7 @@ stop_macro_js = """
 
 
 class BrowserIntegrationStopCommand(sublime_plugin.WindowCommand):
-    plugin_name = "Stop recording macro"
+    plugin_name = "Stop recording macro (experimental)"
     plugin_description = "Stop recording browser interaction."
 
     @require_browser
