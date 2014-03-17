@@ -8,8 +8,52 @@
         "command": "browser_integration_launch"
     },
     {
+        "caption": "Browser Integration: Reload",
+        "command": "browser_integration_reload"
+    },
+    {
         "caption": "Browser Integration: Navigate To",
         "command": "browser_integration_navigate"
+    },
+    {
+        "caption": "Browser Integration: Execute selected code",
+        "command": "browser_integration_execute"
+    },
+    {
+        "caption": "Browser Integration: View loaded CSS (stylesheets)",
+        "command": "browser_integration_stylesheets"
+    },
+    {
+        "caption": "Browser Integration: Select elements",
+        "command": "browser_integration_select"
+    },
+    {
+        "caption": "Browser Integration: View page source",
+        "command": "browser_integration_source"
+    },
+    {
+        "caption": "Browser Integration: Record macro (experimental)",
+        "command": "browser_integration_record"
+    },
+    {
+        "caption": "Browser Integration: Stop recording macro (experimental)",
+        "command": "browser_integration_stop"
+    },
+    {
+        "caption": "Browser Integration: Play macro (experimental)",
+        "command": "browser_integration_play"
+    },
+    {
+        "caption": "Browser Integration: Click elements",
+        "command": "browser_integration_click"
+    },
+    {
+        "caption": "Browser Integration: Type into selected elements",
+        "command": "browser_integration_type"
+    },
+    {
+        "caption": "Browser Integration: Change selected elements class",
+        "command": "browser_integration_class"
     },
     {
         "command": "open_file",
