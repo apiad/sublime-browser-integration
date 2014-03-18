@@ -2,14 +2,8 @@ from .browser_integration import *
 
 
 inject_embedded_css_js = """
-    var sheets = document.querySelectorAll('style');
-
-    for(var i=0; i < sheets.length; i++) {
-        if (sheets[i].getAttribute('data-bi-css') == '%s') {
-            sheets[i].innerHTML = %s;
-            break;
-        }
-    }
+    var sheet = document.querySelector('style[data-bi-css="%s"]');
+    sheet.innerHTML = %s;
 """
 
 
