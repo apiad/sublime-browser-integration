@@ -63,7 +63,7 @@ After opening the browser, it will navigate automatically to your configured sta
 
 **Key binding:** `ctrl-shift+b,r`
 
-Reloads the browser. You can configure the `reload_on_save` setting to automatically invoke this command upon save. The `reload_on_save_selector` contains a list of regular expressions. Every time you save a file, if its filename matches any of the regular expressions, the browser will be reloaded. By default this options are set so to reload upon saving any HTML, CSS or JavaScript file.
+Reloads the browser. <!-- You can configure the `reload_on_save` setting to automatically invoke this command upon save. The `reload_on_save_selector` contains a list of regular expressions. Every time you save a file, if its filename matches any of the regular expressions, the browser will be reloaded. By default this options are set so to reload upon saving any HTML, CSS or JavaScript file. -->
 
 ### Navigate To
 
@@ -81,11 +81,15 @@ Takes the selected JavaScript source and runs it in the browser. If the code ret
 
 **Key binding:** `ctrl+shift+b,c`
 
-Opens a quick panel with the list of all stylesheets that are currently loaded in the browser. Imported stylesheets (`link` tags) are listed by URL. Embedded stylesheets (`style` tags) are listed independently, with a small preview of the style code. Upon selecting one of the entries, a new tab is openned with the content of the stylesheet. If it was an imported stylesheet, the command will attempt to download the `link` tag's `href` property, and open it in a new tag. If it was embedded, the command will copy the `innerHTML` property of the `style` tag, and paste it in a new tab.
+Opens a quick panel with the list of all stylesheets that are currently loaded in the browser. Imported stylesheets (`link` tags) are listed by URL. Embedded stylesheets (`style` tags) are listed independently, with a small preview of the style code. Upon selecting one of the entries, a new tab is openned with the content of the stylesheet.
+
+If it was an imported stylesheet, the command will attempt to download the `link` tag's `href` property, and open it in a new tag.
+
+If it was embedded, the command will copy the `innerHTML` property of the `style` tag, and paste it in a new tab. Modifying the content of an embedded CSS stylesheet will automagically (and asynchronously) reload the stylesheet `innerHTML` property on the browser.
 
 Right now I'm working on a feature to allow the specification of mappings between URLs and local files, so that the command can identify which URLs are local static files, and load those files instead of downloading the stylesheets.
 
-Another incoming feature is the live editing of these CSS files, with automatic asynchronous browser reload, something I'm very excited of, but still trying to get to work.
+Another incoming feature is the live editing of these mapped CSS files, with automatic asynchronous browser reload, something I'm very excited of, but still trying to get to work.
 
 ### Select elements
 
