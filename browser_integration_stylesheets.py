@@ -12,10 +12,15 @@ get_css_hrefs_js = """
         if (sheet.href) {
             results.push([styleSheets[i].href, '']);
         }
-        else {
-            results.push(['Embedded stylesheet #' + (embedded++),
-                           sheet.ownerNode.innerHTML.substr(0, 55) + '...'])
-        }
+    }
+
+    var embeddedStyles = document.querySelectorAll('style')
+
+    for (var i=0; i < embeddedStyles.length; i++) {
+        var sheet = embeddedStyles[i];
+
+        results.push(['Embedded Style #' + (i+1),
+                      sheet.innerHTML.substr(0, 50) + '...'])
     }
 
     return results;
@@ -23,22 +28,23 @@ get_css_hrefs_js = """
 
 
 get_embedded_css_text = """
-    return document.styleSheets[%i].ownerNode.innerHTML;
+    var sheet = document.querySelectorAll('style')[%i];
+    sheet.setAttribute('data-bi-css', %i);
+    return sheet.innerHTML;
 """
 
 
-class BrowserIntegrationStylesheetsCommand(sublime_plugin.ApplicationCommand):
+class BrowserIntegrationStylesheetsCommand(sublime_plugin.WindowCommand):
     plugin_name = "View loaded CSS (stylesheets)"
     plugin_description = "Lists all loaded stylesheets."
 
     @require_browser
     @async
     def run(self):
-        @async
         def load_css(i):
             if i >= 0:
                 if (results[i][0].startswith('Embedded')):
-                    text = browser.execute(get_embedded_css_text % i)
+                    text = browser.execute(get_embedded_css_text % (i, i))
                     name = 'embedded-stylesheet-%i.css' % i
                 else:
                     from urllib.request import urlopen
