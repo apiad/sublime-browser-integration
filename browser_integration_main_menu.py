@@ -13,6 +13,7 @@ from .browser_integration_class import *
 from .browser_integration_record import *
 from .browser_integration_stop import *
 from .browser_integration_play import *
+from .browser_integration_localstorage import *
 
 
 class BrowserIntegrationMainMenuCommand(sublime_plugin.ApplicationCommand):
@@ -25,6 +26,7 @@ class BrowserIntegrationMainMenuCommand(sublime_plugin.ApplicationCommand):
             ("View", "View and modify text data of current document", [
                 BrowserIntegrationStylesheetsCommand,
                 BrowserIntegrationSourceCommand,
+                BrowserIntegrationLocalstorageCommand,
             ]),
             ("Interact", "Interact with the document elements.", [
                 BrowserIntegrationSelectCommand,
