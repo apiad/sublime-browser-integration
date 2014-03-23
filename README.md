@@ -49,7 +49,7 @@ Right now, this is what it can do:
 
 Opens a menu panel, where you can find all available commands, navigate, view descriptions, etc. If in doubt, start here. All commands are accessible through this menu, but most of them also have direct key bindings.
 
-When first run, it will only show one command: **Launch Browser**. This is a necessary step before running any other browser-related command.
+The first command is always **Launch Browser**. This is a necessary step before running any other browser-related command.
 
 ### Launch Browser
 
@@ -95,13 +95,37 @@ The commands in this submenu allow you to load and modify (sometimes live) docum
 
 Opens a quick panel with the list of all stylesheets that are currently loaded in the browser. Imported stylesheets (`link` tags) are listed by URL. Embedded stylesheets (`style` tags) are listed independently, with a small preview of the style code. Upon selecting one of the entries, a new tab is openned with the content of the stylesheet.
 
-If it was an imported stylesheet, the command will attempt to download the `link` tag's `href` property, and open it in a new tag.
+If it was an imported stylesheet, the plugin will try to automagically locate the corresponding static file in your project folders. To do that, you have to define mappings that allow the plugin to correlate `href`s with file names. The `static_files_mapping` settings option does just that using regular expressions. Its default value is:
+
+    "static_files_mapping": [
+        // Django-style matches.
+        // Links like `http://localhost:8000/static/path/to/style.css`
+        // will match all your internal projects `/static/` dirs,
+        // but **not** the external `static/` folder where Django
+        // collects static files.
+        {
+            "selector": "^http[s]?://localhost:\\d+/static/(.*)\\.css$",
+            "matches": [
+                "^(.+)/static/\\1.css$"
+            ]
+        },
+        // Exact matches.
+        // Links like `http://localhost:8000/path/to/style.css` will
+        // match exactly those file paths in your project folders.
+        {
+            "selector": "^http[s]?://localhost:\\d+/(.*)\\.css$",
+            "matches": [
+                "^\\1.css$"
+            ]
+        }
+    ]
+
+If you know something about regular expressions you will easily see what's going on. A `selector` is tested against an `href`, and if it matches, then the project folders are searched for filenames matching the corresponding regular expressions. Back substitutions are allowed. The first matching filename will be opened. If no file matches, then the command will attempt to download the `link` tag's `href` property, and open it in a new tag.
+
+Right now I'm working on the live editing of these mapped CSS files, with automatic asynchronous browser reload, something I'm very excited of, but still trying to get to work.
 
 If it was embedded, the command will copy the `innerHTML` property of the `style` tag, and paste it in a new tab. Modifying the content of an embedded CSS stylesheet will automagically (and asynchronously) reload the stylesheet `innerHTML` property on the browser.
 
-Right now I'm working on a feature to allow the specification of mappings between URLs and local files, so that the command can identify which URLs are local static files, and load those files instead of downloading the stylesheets.
-
-Another incoming feature is the live editing of these mapped CSS files, with automatic asynchronous browser reload, something I'm very excited of, but still trying to get to work.
 
 ### View :: Page Source
 
