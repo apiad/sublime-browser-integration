@@ -1,19 +1,25 @@
 Current features:
   ☐ View loaded CSS
     ☐ Attempt to auto-magically recognize which of the CSS files could be a local static file, to open your local file instead of downloading the file.
+  ☐ Macros
+    ☐ Record interaction from Sublime as well (highlighting, clicking, typing, navigating)
 
 New features:
   ☐ Live CSS editing
     ☐ Inject a custom `style` tag in the DOM with the CSS changes since last reload.
   ☐ CSS changes
     ☐ Calculate a CSS 'diff' in the browser, and generate a CSS patch file.
-  ☐ Menus
-    ☐ Add a fully navigable menu for all commands, with key bindings.
-  ☐ Download `chromedriver` automatically from `sublime.apiad.net`.
 
 Bugs:
   ☐ The `chromedriver` in the Linux repositories (Ubuntu) doesn't work.
-  ☐ The `chromedriver` for Windows doesn't get along with Chrome 32.
 
 General:
-  ☐ Refactor all code into different .py files and classes.
+
+
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+Archive:
+ ✔ Menus @done (14-03-23 02:45) @project(New features)
+ ✔ Add a fully navigable menu for all commands, with key bindings. @done (14-03-23 02:44) @project(New features)
+ ✔ Download `chromedriver` automatically from `sublime.apiad.net`. @done (14-03-23 02:44) @project(New features)
+ ✔ The `chromedriver` for Windows doesn't get along with Chrome 32. @done (14-03-23 02:43) @project(Bugs)
+ ✔ Refactor all code into different .py files and classes. @done (14-03-23 02:44) @project(General)
