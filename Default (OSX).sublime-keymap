@@ -1,7 +1,52 @@
 [{
-  "keys": ["super+alt+shift+b"],
-  "command": "browser_integration_main_menu"
+    "keys": ["super+alt+shift+b"],
+    "command": "browser_integration_main_menu"
 }, {
-  "keys": ["super+shift+b","l"],
-  "command": "browser_integration_launch"
+    "keys": ["super+shift+b", "l"],
+    "command": "browser_integration_launch"
+}, {
+    "keys": ["super+shift+b", "r"],
+    "command": "browser_integration_reload"
+}, {
+    "keys": ["super+shift+b", "n"],
+    "command": "browser_integration_navigate"
+}, {
+    "keys": ["super+shift+b", "r"],
+    "command": "browser_integration_reload"
+}, {
+    "keys": ["super+shift+b", "e", "c"],
+    "command": "browser_integration_execute"
+}, {
+    "keys": ["super+shift+b", "v", "c"],
+    "command": "browser_integration_stylesheets"
+}, {
+    "keys": ["super+shift+b", "v", "s"],
+    "command": "browser_integration_source"
+}, {
+    "keys": ["super+shift+b", "v", "l"],
+    "command": "browser_integration_localstorage"
+}, {
+    "keys": ["super+shift+b", "i", "s"],
+    "command": "browser_integration_select"
+}, {
+    "keys": ["super+shift+b", "i", "c"],
+    "command": "browser_integration_click"
+}, {
+    "keys": ["super+shift+b", "i", "t"],
+    "command": "browser_integration_type"
+}, {
+    "keys": ["super+shift+b", "i", "s"],
+    "command": "browser_integration_class"
+}, {
+    "keys": ["super+shift+b", "m", "r"],
+    "command": "browser_integration_record"
+}, {
+    "keys": ["super+shift+b", "m", "s"],
+    "command": "browser_integration_stop"
+}, {
+    "keys": ["super+shift+b", "m", "p"],
+    "command": "browser_integration_play"
+}, {
+    "keys": ["super+shift+b", "m", "d"],
+    "command": "browser_integration_playdelay"
 }]

@@ -1,7 +1,52 @@
 [{
-  "keys": ["ctrl+alt+shift+b"],
-  "command": "browser_integration_main_menu"
+    "keys": ["ctrl+alt+shift+b"],
+    "command": "browser_integration_main_menu"
 }, {
-  "keys": ["ctrl+shift+b","l"],
-  "command": "browser_integration_launch"
+    "keys": ["ctrl+shift+b", "l"],
+    "command": "browser_integration_launch"
+}, {
+    "keys": ["ctrl+shift+b", "r"],
+    "command": "browser_integration_reload"
+}, {
+    "keys": ["ctrl+shift+b", "n"],
+    "command": "browser_integration_navigate"
+}, {
+    "keys": ["ctrl+shift+b", "r"],
+    "command": "browser_integration_reload"
+}, {
+    "keys": ["ctrl+shift+b", "e", "c"],
+    "command": "browser_integration_execute"
+}, {
+    "keys": ["ctrl+shift+b", "v", "c"],
+    "command": "browser_integration_stylesheets"
+}, {
+    "keys": ["ctrl+shift+b", "v", "s"],
+    "command": "browser_integration_source"
+}, {
+    "keys": ["ctrl+shift+b", "v", "l"],
+    "command": "browser_integration_localstorage"
+}, {
+    "keys": ["ctrl+shift+b", "i", "s"],
+    "command": "browser_integration_select"
+}, {
+    "keys": ["ctrl+shift+b", "i", "c"],
+    "command": "browser_integration_click"
+}, {
+    "keys": ["ctrl+shift+b", "i", "t"],
+    "command": "browser_integration_type"
+}, {
+    "keys": ["ctrl+shift+b", "i", "s"],
+    "command": "browser_integration_class"
+}, {
+    "keys": ["ctrl+shift+b", "m", "r"],
+    "command": "browser_integration_record"
+}, {
+    "keys": ["ctrl+shift+b", "m", "s"],
+    "command": "browser_integration_stop"
+}, {
+    "keys": ["ctrl+shift+b", "m", "p"],
+    "command": "browser_integration_play"
+}, {
+    "keys": ["ctrl+shift+b", "m", "d"],
+    "command": "browser_integration_playdelay"
 }]
