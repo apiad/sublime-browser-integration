@@ -5,7 +5,7 @@ A Sublime Text 3 plugin for interacting with the browser and perform web develop
 
 ### Disclaimer:
 
-This plugin is in **development** state, which means is **unstable**, and it might not work in your system. It **should** work with *Google Chrome* and *Chromium Browser* versions 31 to 34, on modern versions of Linux, MacOSX and Windows, *but* it has only been tested so far with:
+This plugin is in **development** state, which means is **unstable**, and it might not work in your system. It **should** work with *Google Chrome* and *Chromium Browser* versions 31 to 34, and modern versions of *Firefox*, on modern versions of Linux, MacOSX and Windows, *but* it has only been tested so far with:
 
 * Ubuntu Linux 13.10 + ST3 (3059) + Chrome 31
 
@@ -14,13 +14,15 @@ Current iterations are constantly changing the names, key bindings, and semantic
 
 ## What is this?
 
-This plugin fires up browser (Chrome only, for now), and keeps a connection open with it, that allows you to send commands and control to the browser from within ST3.
+This plugin fires up a browser (Chrome and Firefox only, for now), and keeps a connection open with it, that allows you to send commands and control to the browser from within ST3.
 
 I made this plugin inspired by the work of _Bret Victor_ and his idea of multimedia connection. Basically, it means that developers should be as close as possible to their creations, and I wasn't happy with the current level of connectivity I can reach in my web development environment.
 
 As web developers, must of the time we work in two different environments: our text editor, and the browser. We have to constantly change form typing code to refreshing the browser, from test short scripts in the browser's development console to writing more complex scripts in the server, from inspecting DOM elements and changing CSS in the browser, to go back to the text editor and figure out where those new CSS rules fit in.
 
 This plugin is my attempt to bring both tools a little closer, and create a connection between browser and text editor that really lets you feel you are working with a single connected tool, not two disconnected different pieces of technology.
+
+**Note:** The plugin is being actively developed with *Chromium*. Support for other browser(s) is experimental. Use at your own risk.
 
 
 ## Installation
@@ -29,7 +31,7 @@ The recommended method is using [Sublime Package Control](https://sublime.wbond.
 
 You can also [clone directly](https://github.com/apiad/sublime-browser-integration.git) from Github, or download a [zip](https://github.com/apiad/sublime-browser-integration/archive/master.zip), and unpack it in your Sublime Text 3 packages folder. If you don't know how to do this, you definitely need the Package Control plugin.
 
-Besides that, you need a recent version of Chrome (31 to 34) and the `Chrome WebDriver` executable. Upon installation of the plugin, it will attempt to download the right executable for your platform (its about 5 MBs) directly from [sublime.apiad.net](http://sublime.apiad.net/browser-integration/chromedriver/) and place it in the same folder as the plugin (this only has to be done once). If this doesn't work, you can try to download it manually, rename it to `chromedriver`, place it alongside the *.sublime-package file (it should be in the root of either your `Packages/` folder or your `Installed Packages/` folder), and give it execution permissions. If this happens to you, please consider filling up the corresponding [issue](https://github.com/apiad/sublime-browser-integration/issues) to help me improve the plugin.
+Besides that, you need a recent version of Chrome (31 to 34) and the `Chrome WebDriver` executable. Upon installation of the plugin, it will attempt to download the right executable for your platform (its about 5~10 MBs) directly from [sublime.apiad.net](http://sublime.apiad.net/browser-integration/chromedriver/) and place it in the same folder as the plugin (this only has to be done once). If this doesn't work, you can try to download it manually, rename it to `chromedriver`, place it alongside the *.sublime-package file (it should be in the root of either your `Packages/` folder or your `Installed Packages/` folder), and give it execution permissions. If this happens to you, please consider filling up the corresponding [issue](https://github.com/apiad/sublime-browser-integration/issues) to help me improve the plugin.
 
 
 ## Configuration
@@ -45,7 +47,7 @@ Right now, this is what it can do:
 
 **Key binding:** `ctrl+alt+shift+b`
 
-Will open a menu panel, where you can find all available commands, navigate, view descriptions, etc. If in doubt, start here. All commands are accessible through this menu, but most of them also have direct key bindings.
+Opens a menu panel, where you can find all available commands, navigate, view descriptions, etc. If in doubt, start here. All commands are accessible through this menu, but most of them also have direct key bindings.
 
 When first run, it will only show one command: **Launch Browser**. This is a necessary step before running any other browser-related command.
 
@@ -53,7 +55,7 @@ When first run, it will only show one command: **Launch Browser**. This is a nec
 
 **Key binding:** `ctrl+shift+b,l`
 
-Opens a new Google Chrome instance. All other browser commands require this one to be called first, and will complain (in your status bar) if Chrome is not open, or if the plugin has lost the connection somehow.
+Opens a quick panel to select a browser to open. Right now it displays *Chrome* and *Firefox*. Select one to launch it. All other browser commands require this one to be called first, and will complain (in your status bar) if the browser is not open, or if the plugin has lost the connection somehow.
 
 After the browser has been opened, the main menu will show more commands. You can directly interact with the opened browser, create new tabs, click in stuff, etc. However, only the first opened tab will be controlled by the plugin, and if closed, connection will be lost and you'll need to launch the browser again. A browser instance can only be controlled if opened through this command, it will not work with an already opened browser.
 
@@ -159,7 +161,7 @@ Opens an input box to type a text, that will be sent to the browser and typed in
 
 ### Interact :: Change selected elements class
 
-**Key binding:** `ctrl+shift+b,i,l`
+**Key binding:** `ctrl+shift+b,i,s`
 
 Open an input box with the value of the `class` attribute of selected elements. If there are more than one selected element, with different classes, the input box will show the union of the elements `class` attributes. Typing into the input panel will update the selected elements `class` attribute in real-time.
 
@@ -175,6 +177,8 @@ The commands in this submenu allow you to record, save and replay browser intera
 
 ### Macro :: Record macro
 
+**Key binding:** `ctrl+shift+b,m,r`
+
 Begins recording browser interactions. Right now the plugin records Mouse and key inputs. For mouse, only mouse down and mouse up of the left mouse button are recored so far. For key inputs, it has only been tested with alphanumeric keys. The plugin also records on which DOM element the interaction took place, and, on mouse inputs, the relative coordinates of mouse position to the such element.
 
 The events data is saved to the `localStorage`, so try not to exceed yourself in recording extremely long macros. A few thousand interactions are OK.
@@ -183,15 +187,21 @@ The events data is saved to the `localStorage`, so try not to exceed yourself in
 
 ### Macro :: Stop recording
 
+**Key binding:** `ctrl+shift+b,m,s`
+
 Collects all macro recording data, to review it and save it in ST3. If there is any data (events) recorded, an input panel will be shown to enter a name for the macro, and after pressing `ENTER` the macro data will be shown on a new file. This data is a JSON object that contains all necessary information to replay the recorded events. You can save then save the document anywhere in your project's directory for later replay.
 
 ### Macro :: Play macro
+
+**Key binding:** `ctrl+shift+b,m,p`
 
 Finds all `.macro` files in your project's directory, and shows them in a list. Selecting one of them will replay all the events that where recorded in the macro.
 
 **Warning:** The saved macro data consists only of DOM events. It has no idea of where or when was the macro recorded. If it finds elements in the current page that fit the description of the recorded events, it will replay them. If you record a macro against some page, and then replay it in some other page, take into account which elements will get clicked or typed! You know what they say: With great power comes great responsibility.
 
 ### Macro :: Play macro (with delays)
+
+**Key binding:** `ctrl+shift+b,m,d`
 
 The same as before, but this time the delays between events is reproduced. This is useful if you recorded the macro against a page that has animations or other complicated interactions. Playing the macro without delays might cause an incorrect behavior because some elements might not appear immediately, and the macro would fail. This command uses `time.sleep` for waiting, so replayed events might have exactly the same delay as the originals, but it should suffice for most cases. To avoid unnecessary waits, no delay is performed when the recored delay is under `10` milliseconds.
 
@@ -206,7 +216,7 @@ I'm working on a few exciting new features:
 
 * Automatic reload on save.
 * Live CSS editing.
-* Macro recording and playing.
+* Improved macro recording and playing.
 * Support for other browsers (Firefox, Opera, perhaps even IE).
 * And many more...
 
@@ -215,7 +225,7 @@ I'm working on a few exciting new features:
 
 Sure, come to [Github](https://github.com/apiad/sublime-browser-integration).
 
-There are many ways to collaborate: just by trying it out and filling up any issues, it will be of great help. It's very hard to develop a multi-platform Sublime Text plugin, specially when you have to deal with different implementations of browsers, and I can not possible test every combination of Sublime Text + Chrome + OS out there, so beta testing is the most precious help you can offer.
+There are many ways to collaborate: just by trying it out and filling up any issues, it will be of great help. It's very hard to develop a multi-platform Sublime Text plugin, specially when you have to deal with different implementations of browsers, and I can not possible test every combination of Sublime Text + Browser + OS out there, so beta testing is the most precious help you can offer.
 
 If you want to put some code into the plugin, then even better! As usual, fork it, and make your pull request. I'm eager to see what other awesome developers like you come up with... ;)
 
