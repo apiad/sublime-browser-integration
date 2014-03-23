@@ -35,7 +35,7 @@
     "keys": ["super+shift+b", "i", "t"],
     "command": "browser_integration_type"
 }, {
-    "keys": ["super+shift+b", "i", "s"],
+    "keys": ["super+shift+b", "i", "l"],
     "command": "browser_integration_class"
 }, {
     "keys": ["super+shift+b", "m", "r"],

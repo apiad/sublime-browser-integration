@@ -20,28 +20,20 @@
         "command": "browser_integration_execute"
     },
     {
-        "caption": "Browser Integration: View loaded CSS (stylesheets)",
+        "caption": "Browser Integration: View loaded CSS stylesheets",
         "command": "browser_integration_stylesheets"
-    },
-    {
-        "caption": "Browser Integration: Select elements",
-        "command": "browser_integration_select"
     },
     {
         "caption": "Browser Integration: View page source",
         "command": "browser_integration_source"
     },
     {
-        "caption": "Browser Integration: Record macro (experimental)",
-        "command": "browser_integration_record"
+        "caption": "Browser Integration: View localStorage content",
+        "command": "browser_integration_localstorage"
     },
     {
-        "caption": "Browser Integration: Stop recording macro (experimental)",
-        "command": "browser_integration_stop"
-    },
-    {
-        "caption": "Browser Integration: Play macro (experimental)",
-        "command": "browser_integration_play"
+        "caption": "Browser Integration: Select elements",
+        "command": "browser_integration_select"
     },
     {
         "caption": "Browser Integration: Click elements",
@@ -54,6 +46,22 @@
     {
         "caption": "Browser Integration: Change selected elements class",
         "command": "browser_integration_class"
+    },
+    {
+        "caption": "Browser Integration: Record macro",
+        "command": "browser_integration_record"
+    },
+    {
+        "caption": "Browser Integration: Stop recording macro",
+        "command": "browser_integration_stop"
+    },
+    {
+        "caption": "Browser Integration: Play macro",
+        "command": "browser_integration_play"
+    },
+    {
+        "caption": "Browser Integration: Play macro (with delays)",
+        "command": "browser_integration_playdelay"
     },
     {
         "command": "open_file",

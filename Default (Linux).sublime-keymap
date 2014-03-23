@@ -35,7 +35,7 @@
     "keys": ["ctrl+shift+b", "i", "t"],
     "command": "browser_integration_type"
 }, {
-    "keys": ["ctrl+shift+b", "i", "s"],
+    "keys": ["ctrl+shift+b", "i", "l"],
     "command": "browser_integration_class"
 }, {
     "keys": ["ctrl+shift+b", "m", "r"],
