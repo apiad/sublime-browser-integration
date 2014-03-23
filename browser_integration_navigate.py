@@ -1,13 +1,29 @@
 from .browser_integration import *
 
 
+get_links_js = """
+    var links = document.links;
+    var result = []
+
+    for(var i=0; i < links.length; i++) {
+        var link = links[i];
+
+        if (link.href) {
+            result.push([link.innerText, link.href])
+        }
+    }
+
+    return result;
+"""
+
+
 class BrowserIntegrationNavigateCommand(sublime_plugin.WindowCommand):
     plugin_name = "Navigate To"
     plugin_description = "Opens a input panel to enter a URL to load in Chrome."
 
     @require_browser
+    @async
     def run(self):
-        @async
         def onDone(str):
             from urllib.parse import urlparse
 
@@ -23,5 +39,21 @@ class BrowserIntegrationNavigateCommand(sublime_plugin.WindowCommand):
 
             status("Loaded %s" % url)
 
-        self.window.show_input_panel('Enter URL', browser.current_url,
-                                     onDone, None, None)
+        result = browser.execute(get_links_js)
+
+        if result:
+            def onQuickDone(i):
+                if i == 0:
+                    self.window.show_input_panel('Enter URL',
+                                                 browser.current_url,
+                                                 onDone, None, None)
+                elif i > 0:
+                    browser.get(result[i-1][1])
+
+            self.window.show_quick_panel(
+                [['Custom URL', 'Enter a custom URL to navigate']] + result,
+                onQuickDone)
+
+        else:
+            self.window.show_input_panel('Enter URL', browser.current_url,
+                                         onDone, None, None)
