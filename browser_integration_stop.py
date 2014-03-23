@@ -23,6 +23,10 @@ class BrowserIntegrationStopCommand(sublime_plugin.WindowCommand):
     plugin_description = "Stop recording browser interaction," \
                          " and collect macro data."
 
+    @staticmethod
+    def visible():
+        return browser.connected() and browser.recording
+
     @require_browser
     @async
     def run(self):

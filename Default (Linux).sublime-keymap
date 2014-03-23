@@ -29,6 +29,12 @@
     "keys": ["ctrl+shift+b", "i", "s"],
     "command": "browser_integration_select"
 }, {
+    "keys": ["ctrl+shift+b", "i", "x"],
+    "command": "browser_integration_selectxpath"
+}, {
+    "keys": ["ctrl+shift+b", "i", "i"],
+    "command": "browser_integration_selectint"
+}, {
     "keys": ["ctrl+shift+b", "i", "c"],
     "command": "browser_integration_click"
 }, {
@@ -49,4 +55,7 @@
 }, {
     "keys": ["ctrl+shift+b", "m", "d"],
     "command": "browser_integration_playdelay"
+}, {
+    "keys": ["ctrl+shift+b", "q"],
+    "command": "browser_integration_quit"
 }]

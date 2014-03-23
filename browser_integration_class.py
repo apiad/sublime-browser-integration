@@ -14,6 +14,10 @@ class BrowserIntegrationClassCommand(sublime_plugin.WindowCommand):
     plugin_name = "Change selected elements class"
     plugin_description = "Opens an input panel to modify selected items class."
 
+    @staticmethod
+    def visible():
+        return browser.connected() and browser.selected_items
+
     @require_browser
     def run(self):
         if not browser.selected_items:

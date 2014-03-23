@@ -72,6 +72,10 @@
         "command": "browser_integration_playdelay"
     },
     {
+        "caption": "Browser Integration: Close browser",
+        "command": "browser_integration_quit"
+    },
+    {
         "command": "open_file",
         "args": {
             "file": "${packages}/BrowserIntegration/BrowserIntegration.sublime-settings"

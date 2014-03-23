@@ -79,6 +79,10 @@ class BrowserIntegrationSelectintCommand(sublime_plugin.WindowCommand):
     plugin_name = "Interactive Selection"
     plugin_description = "Opens a tree view of the DOM to select an element."
 
+    @staticmethod
+    def visible():
+        return browser.connected()
+
     @async
     @require_browser
     def run(self):

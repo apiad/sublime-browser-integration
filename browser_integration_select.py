@@ -5,6 +5,10 @@ class BrowserIntegrationSelectCommand(sublime_plugin.WindowCommand):
     plugin_name = "Select by CSS"
     plugin_description = "Select DOM elements by CSS selector."
 
+    @staticmethod
+    def visible():
+        return browser.connected()
+
     @async
     @require_browser
     def run(self):
@@ -30,6 +34,10 @@ class BrowserIntegrationSelectCommand(sublime_plugin.WindowCommand):
 class BrowserIntegrationSelectxpathCommand(sublime_plugin.WindowCommand):
     plugin_name = "Select by XPath"
     plugin_description = "Select DOM elements by XPath selector."
+
+    @staticmethod
+    def visible():
+        return browser.connected()
 
     @async
     @require_browser

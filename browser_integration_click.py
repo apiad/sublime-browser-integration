@@ -6,6 +6,10 @@ class BrowserIntegrationClickCommand(sublime_plugin.WindowCommand):
     plugin_name = "Click elements"
     plugin_description = "Click currently selected items in the browser."
 
+    @staticmethod
+    def visible():
+        return browser.connected() and browser.selected_items
+
     @require_browser
     def run(self):
         if not browser.selected_items:

@@ -15,6 +15,7 @@ from .browser_integration_record import *
 from .browser_integration_stop import *
 from .browser_integration_play import *
 from .browser_integration_localstorage import *
+from .browser_integration_quit import *
 
 
 class BrowserIntegrationMainMenuCommand(sublime_plugin.ApplicationCommand):
@@ -44,8 +45,28 @@ class BrowserIntegrationMainMenuCommand(sublime_plugin.ApplicationCommand):
                 BrowserIntegrationStopCommand,
                 BrowserIntegrationPlayCommand,
                 BrowserIntegrationPlaydelayCommand,
-            ])
+            ]),
+            BrowserIntegrationQuitCommand
         ]
+
+        def filter_visible(cmd):
+            if not isinstance(cmd, tuple):
+                if cmd.visible():
+                    return cmd
+                else:
+                    return None
+
+            name, desc, submenu = cmd
+            submenu = [filter_visible(c) for c in submenu
+                       if filter_visible(c)]
+
+            if submenu:
+                return name, desc, submenu
+
+            return None
+
+        main_menu_commands = [filter_visible(c) for c in main_menu_commands
+                              if filter_visible(c)]
 
         def select_command_func(commands):
             def select_command(i):

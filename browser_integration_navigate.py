@@ -21,6 +21,10 @@ class BrowserIntegrationNavigateCommand(sublime_plugin.WindowCommand):
     plugin_name = "Navigate To"
     plugin_description = "Opens a input panel to enter a URL to load in Chrome."
 
+    @staticmethod
+    def visible():
+        return browser.connected()
+
     @require_browser
     @async
     def run(self):

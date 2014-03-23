@@ -5,6 +5,10 @@ class BrowserIntegrationSourceCommand(sublime_plugin.ApplicationCommand):
     plugin_name = 'Page Source'
     plugin_description = "Open the page source in a new tab."
 
+    @staticmethod
+    def visible():
+        return browser.connected()
+
     @require_browser
     @async
     def run(self):

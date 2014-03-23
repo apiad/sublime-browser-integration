@@ -41,6 +41,10 @@ class BrowserIntegrationStylesheetsCommand(sublime_plugin.WindowCommand):
     plugin_name = "StyleSheets (CSS)"
     plugin_description = "Lists all loaded stylesheets."
 
+    @staticmethod
+    def visible():
+        return browser.connected()
+
     @require_browser
     @async
     def run(self):

@@ -171,7 +171,7 @@ Opens an input box, where you can type any valid CSS selector. Matching items ar
 
 ### Interact :: Select by XPath
 
-**Key binding:** `ctrl+shift+b,i,s`
+**Key binding:** `ctrl+shift+b,i,x`
 
 The same as before, but now you can enter an XPath expression.
 
@@ -240,6 +240,12 @@ Finds all `.macro` files in your project's directory, and shows them in a list. 
 **Key binding:** `ctrl+shift+b,m,d`
 
 The same as before, but this time the delays between events is reproduced. This is useful if you recorded the macro against a page that has animations or other complicated interactions. Playing the macro without delays might cause an incorrect behavior because some elements might not appear immediately, and the macro would fail. This command uses `time.sleep` for waiting, so replayed events might have exactly the same delay as the originals, but it should suffice for most cases. To avoid unnecessary waits, no delay is performed when the recored delay is under `10` milliseconds.
+
+### Close Browser
+
+**Key binding:** `ctrl+shift+b,q`
+
+Closes the current browser instance, as expected.
 
 ## How does it work?
 

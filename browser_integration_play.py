@@ -6,6 +6,10 @@ class BrowserIntegrationPlayCommand(sublime_plugin.WindowCommand):
     plugin_name = 'Play macro'
     plugin_description = 'Plays a previously recorded macro.'
 
+    @staticmethod
+    def visible():
+        return browser.connected()
+
     @require_browser
     @async
     def run(self):

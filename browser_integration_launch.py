@@ -5,6 +5,10 @@ class BrowserIntegrationLaunchCommand(sublime_plugin.ApplicationCommand):
     plugin_name = "Launch Browser"
     plugin_description = "Launches a new browser instance."
 
+    @staticmethod
+    def visible():
+        return not browser.connected()
+
     @async
     def run(self):
         browsers = ['Chrome', 'Firefox']

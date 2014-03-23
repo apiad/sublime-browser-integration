@@ -1,5 +1,5 @@
 [{
-    "keys": ["super+alt+shift+b"],
+    "keys": ["super+ctrl+shift+b"],
     "command": "browser_integration_main_menu"
 }, {
     "keys": ["super+shift+b", "l"],
@@ -29,6 +29,12 @@
     "keys": ["super+shift+b", "i", "s"],
     "command": "browser_integration_select"
 }, {
+    "keys": ["super+shift+b", "i", "x"],
+    "command": "browser_integration_selectxpath"
+}, {
+    "keys": ["super+shift+b", "i", "i"],
+    "command": "browser_integration_selectint"
+}, {
     "keys": ["super+shift+b", "i", "c"],
     "command": "browser_integration_click"
 }, {
@@ -49,4 +55,7 @@
 }, {
     "keys": ["super+shift+b", "m", "d"],
     "command": "browser_integration_playdelay"
+}, {
+    "keys": ["super+shift+b", "q"],
+    "command": "browser_integration_quit"
 }]

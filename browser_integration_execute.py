@@ -5,6 +5,10 @@ class BrowserIntegrationExecuteCommand(sublime_plugin.TextCommand):
     plugin_name = "Selected code"
     plugin_description = "Executes selected JavaScript code in the browser."
 
+    @staticmethod
+    def visible():
+        return browser.connected()
+
     @require_browser
     @async
     def run(self, edit):

@@ -13,6 +13,11 @@ class BrowserIntegrationRecordCommand(sublime_plugin.WindowCommand):
     plugin_name = "Record macro"
     plugin_description = "Start recording browser interaction."
 
+    @staticmethod
+    def visible():
+        return browser.connected() and not browser.recording
+
+    @async
     @require_browser
     def run(self):
         browser.recording = True

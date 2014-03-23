@@ -19,6 +19,10 @@ class BrowserIntegrationLocalstorageCommand(sublime_plugin.WindowCommand):
     plugin_name = "LocalStorage Content"
     plugin_description = "View and modify the content of the localStorage."
 
+    @staticmethod
+    def visible():
+        return browser.connected()
+
     @require_browser
     def run(self):
         with loading("Dumping localStorage content."):
