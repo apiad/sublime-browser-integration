@@ -38,7 +38,7 @@ get_embedded_css_text = """
 
 
 class BrowserIntegrationStylesheetsCommand(sublime_plugin.WindowCommand):
-    plugin_name = "Loaded StyleSheets"
+    plugin_name = "StyleSheets (CSS)"
     plugin_description = "Lists all loaded stylesheets."
 
     @require_browser

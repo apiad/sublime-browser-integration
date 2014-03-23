@@ -89,7 +89,7 @@ Takes the selected JavaScript source and runs it in the browser. If the code ret
 
 The commands in this submenu allow you to load and modify (sometimes live) document data. So far, this are the options:
 
-### View :: Loaded StyleSheets (CSS)
+### View :: StyleSheets (CSS)
 
 **Key binding:** `ctrl+shift+b,v,c`
 
@@ -163,7 +163,7 @@ Restores the document stylesheets to the last saved state, if any.
 
 The commands in this submenu allow to directly interact with the DOM elements.
 
-### Interact :: Select elements
+### Interact :: Select elements by CSS
 
 **Key binding:** `ctrl+shift+b,i,s`
 

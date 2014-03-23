@@ -23,8 +23,8 @@ unselect_js = """
 
 
 class BrowserIntegrationSelectCommand(sublime_plugin.WindowCommand):
-    plugin_name = "Select elements"
-    plugin_description = "Select DOM elements either by CSS or XPath."
+    plugin_name = "Select elements by CSS"
+    plugin_description = "Select DOM elements by CSS selector."
 
     @require_browser
     def run(self):
