@@ -2,7 +2,7 @@ from .browser_integration import *
 
 
 class BrowserIntegrationSourceCommand(sublime_plugin.ApplicationCommand):
-    plugin_name = 'View page source'
+    plugin_name = 'Page Source'
     plugin_description = "Open the page source in a new tab."
 
     @require_browser
