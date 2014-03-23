@@ -33,5 +33,11 @@ class BrowserIntegrationClassCommand(sublime_plugin.WindowCommand):
 
         classes = " ".join(classes)
 
-        self.window.show_input_panel('Input', classes,
-                                     None, change_class, None)
+        @async
+        def cancel_class():
+            browser.execute(set_class_js % (browser.old_selector, classes))
+
+        view = self.window.show_input_panel('Input', classes,
+                                            None, change_class, cancel_class)
+
+        view.sel().add(sublime.Region(0, view.size()))
