@@ -28,8 +28,23 @@ class BrowserIntegrationSelectCommand(sublime_plugin.WindowCommand):
 
     @require_browser
     def run(self):
-        self.window.show_input_panel('Selector', browser.old_selector,
-                                     None, self.highlight, None)
+        old_selector = browser.old_selector
+
+        def cancel():
+            browser.execute(unselect_js % browser.old_selector)
+
+            if self.selector:
+                browser.execute(unselect_js % self.selector)
+
+            if old_selector:
+                browser.execute(select_js % (old_selector,
+                                             setting('highlight_outline')))
+                browser.select_css(old_selector)
+
+        view = self.window.show_input_panel('Selector', browser.old_selector,
+                                            None, self.highlight, cancel)
+
+        view.sel().add(sublime.Region(0, view.size()))
 
     @require_browser
     def highlight(self, selector):
@@ -37,6 +52,7 @@ class BrowserIntegrationSelectCommand(sublime_plugin.WindowCommand):
             browser.execute(unselect_js % browser.old_selector)
 
         if selector:
+            self.selector = selector
             browser.execute(select_js % (selector,
                                          setting('highlight_outline')))
 
