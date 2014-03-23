@@ -58,11 +58,15 @@ def setting(setting, cmd=None, default=None):
 
 
 def status(msg):
-    sublime.status_message("Browser Integration :: %s" % msg)
+    msg = "Browser Integration :: %s" % msg
+    print(msg)
+    sublime.status_message(msg)
 
 
 def warning(msg):
-    sublime.status_message("(!) Browser Integration :: %s" % msg)
+    msg = "(!) Browser Integration :: %s" % msg
+    print(msg)
+    sublime.status_message(msg)
 
 
 class Loader:
@@ -81,6 +85,8 @@ class Loader:
         count = 0
         up = True
 
+        print("[Start] Browser Integration :: " + self.msg)
+
         while not self.stop:
             load = "[" + " " * count + "=" + " " * (5 - count) + "]"
             sublime.status_message(load + " Browser Integration :: " + self.msg)
@@ -94,6 +100,7 @@ class Loader:
                 if count <= 0:
                     up = True
 
+        print("[End] Browser Integration :: " + self.msg)
         sublime.status_message("")
 
 

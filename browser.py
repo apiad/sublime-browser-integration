@@ -4,6 +4,7 @@ import os
 sys.path.append(os.path.dirname(__file__))
 
 from .selenium.webdriver import Chrome
+from .selenium.webdriver import Firefox
 
 
 class Browser:
@@ -18,9 +19,15 @@ class Browser:
     def connected(self):
         return self.webdriver is not None
 
-    def connect(self):
-        self.webdriver = Chrome(os.path.join(os.path.dirname(__file__), '..',
-                                             'chromedriver'))
+    def connect(self, browser):
+        if browser == 'Chrome':
+            self.webdriver = Chrome(os.path.join(os.path.dirname(__file__),
+                                    '..', 'chromedriver'))
+        elif browser == 'Firefox':
+            self.webdriver = Firefox()
+        else:
+            from .browser_integration import warning
+            warning('Unknow browser driver: {}'.format(browser))
 
     def quit(self):
         self.webdriver.quit()

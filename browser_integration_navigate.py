@@ -2,14 +2,14 @@ from .browser_integration import *
 
 
 get_links_js = """
-    var links = document.links;
+    var links = document.querySelectorAll('a');
     var result = []
 
     for(var i=0; i < links.length; i++) {
         var link = links[i];
 
         if (link.href) {
-            result.push([link.innerText, link.href])
+            result.push([link.text, link.href])
         }
     }
 

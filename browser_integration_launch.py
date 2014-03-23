@@ -5,15 +5,23 @@ class BrowserIntegrationLaunchCommand(sublime_plugin.ApplicationCommand):
     plugin_name = "Launch Browser"
     plugin_description = "Launches a new browser instance."
 
+    @async
     def run(self):
+        browsers = ['Chrome', 'Firefox']
+
         @async
-        def open_chrome():
+        def open_browser(i):
+            if i < 0:
+                return
+
+            b = browsers[i]
+
             if browser.connected():
-                with loading("Shutting down current Chrome instance."):
+                with loading("Shutting down current WebDriver instance."):
                     browser.quit()
 
-            with loading("Opening new Chrome instance."):
-                browser.connect()
+            with loading("Opening new %s instance." % b):
+                browser.connect(b)
 
                 if setting('maximize_on_startup', self):
                     browser.maximize_window()
@@ -28,6 +36,6 @@ class BrowserIntegrationLaunchCommand(sublime_plugin.ApplicationCommand):
             with loading("Loading %s" % home):
                 browser.get(home)
 
-            status("Chrome is up and running!")
+            status("%s is up and running!" % b)
 
-        open_chrome()
+        sublime.active_window().show_quick_panel(browsers, open_browser)
