@@ -1,10 +1,10 @@
 {
-    // The default location to open when firing up the browser
+    // The default location to open when firing up the browser.
     "startup_location": "localhost:8000",
-    // Whether to maximize the browser window on startup
+    // Whether to maximize the browser window on startup.
     "maximize_on_startup": false,
     // If `maximize_on_startup` is false, the browser window will
-    // be moved to this position on startup ([x, y])
+    // be moved to this position on startup ([x, y]).
     "window_position": [0, 0],
     // If `maximize_on_startup` is false, the browser window will
     // be set to this size on startup ([width, height]).
@@ -12,7 +12,7 @@
     // in the same monitor.
     "window_size": [480, 780],
     // This style will be applied to the `outline` property
-    // of selected items (Select with CSS or XPath command)
+    // of selected items (Select with CSS or XPath command).
     "highlight_outline": "2px solid red",
     // This section defines a mapping of hrefs to static files.
     // It is used by some commands (view CSS and live CSS editing)
@@ -40,5 +40,13 @@
                 "^\\1.css$"
             ]
         }
+    ],
+    // Set to true to automatically reload on save.
+    "reload_on_save": true,
+    // Files matched by these selectors cause the browser to reload on save.
+    "reload_on_save_selectors": [
+        "^.*\\.html$", // HTML files
+        "^.*\\.js$",   // JavaScript source files
+        "^.*\\.css$"   // CSS files
     ]
 }

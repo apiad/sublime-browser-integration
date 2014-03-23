@@ -65,7 +65,7 @@ After opening the browser, it will navigate automatically to your configured sta
 
 **Key binding:** `ctrl-shift+b,r`
 
-Reloads the browser. <!-- You can configure the `reload_on_save` setting to automatically invoke this command upon save. The `reload_on_save_selector` contains a list of regular expressions. Every time you save a file, if its filename matches any of the regular expressions, the browser will be reloaded. By default this options are set so to reload upon saving any HTML, CSS or JavaScript file. -->
+Reloads the browser. You can configure the `reload_on_save` setting to automatically invoke this command upon save. The `reload_on_save_selectors` contains a list of regular expressions. Every time you save a file, if its filename matches any of the regular expressions, the browser will be reloaded. By default this options are set so to reload upon saving any HTML, CSS or JavaScript file.
 
 ### Navigate To
 
