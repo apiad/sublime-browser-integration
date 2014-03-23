@@ -169,14 +169,31 @@ Open an input box with the value of the `class` attribute of selected elements. 
 
 Opens a new buffer with the selected element(s) CSS style rules. Changing these rules will automatically update the browser. -->
 
-### Macro (experimental)
+### Macro
 
-With these commands in combination you can easily automatize boring tasks. For instance, every time I work on my site's project, I open ST3, start my development server, open Chrome, navigate to `localhost:9090`, type in my credentials, and then I can start developing.
+The commands in this submenu allow you to record, save and replay browser interaction sessions. With these commands in combination you can easily automatize boring tasks. For instance, every time I work on my site's project, I open ST3, start my development server, open Chrome, navigate to `localhost:9090`, type in my credentials, and then I can start developing.
 
-Right now I'm working on a macro utility for the plugin, that will be available shortly. We need a special macro system, because most of these commands are asynchronous, and hence don't get along very well with the macro system integrated into Sublime.
+### Macro :: Record macro
 
-For the time being, you can record macros, save them, and play them again later. Right now the plugin only stores click events, and it doesn't work very well, so play with care. Select `Record macro` from the main menu, and then interact with the browser. Select `Stop recording macro` once done, a small input panel will pop out asking for a macro name. Enter a name and hit enter, and the macro data will be shown on a new file (its a JSON with all the evens information). Save it somewhere in your project, and when you later call `Play macro`, a small quick panel will show you all macros stored in your project (files with `.macro` extension).
+Begins recording browser interactions. Right now the plugin records Mouse and key inputs. For mouse, only mouse down and mouse up of the left mouse button are recored so far. For key inputs, it has only been tested with alphanumeric keys. The plugin also records on which DOM element the interaction took place, and, on mouse inputs, the relative coordinates of mouse position to the such element.
 
+The events data is saved to the `localStorage`, so try not to exceed yourself in recording extremely long macros. A few thousand interactions are OK.
+
+**Note:** When recording macro there are a few things you cannot do, either in ST3 and the browser. In particular, most of the other commands (of **this** plugin only) will not work as expected, and might delay until the recording is over, or do something weirder. This is due to the recording process, which involves the constant executing of some JavaScript. For the same reason, you cannot open the browser development console during recording (well, you can, but it will close almost instantly). I'm currently working on ways to alleviate this, sorry for the inconvenience.
+
+### Macro :: Stop recording
+
+Collects all macro recording data, to review it and save it in ST3. If there is any data (events) recorded, an input panel will be shown to enter a name for the macro, and after pressing `ENTER` the macro data will be shown on a new file. This data is a JSON object that contains all necessary information to replay the recorded events. You can save then save the document anywhere in your project's directory for later replay.
+
+### Macro :: Play macro
+
+Finds all `.macro` files in your project's directory, and shows them in a list. Selecting one of them will replay all the events that where recorded in the macro.
+
+**Warning:** The saved macro data consists only of DOM events. It has no idea of where or when was the macro recorded. If it finds elements in the current page that fit the description of the recorded events, it will replay them. If you record a macro against some page, and then replay it in some other page, take into account which elements will get clicked or typed! You know what they say: With great power comes great responsibility.
+
+### Macro :: Play macro (with delays)
+
+The same as before, but this time the delays between events is reproduced. This is useful if you recorded the macro against a page that has animations or other complicated interactions. Playing the macro without delays might cause an incorrect behavior because some elements might not appear immediately, and the macro would fail. This command uses `time.sleep` for waiting, so replayed events might have exactly the same delay as the originals, but it should suffice for most cases. To avoid unnecessary waits, no delay is performed when the recored delay is under `10` milliseconds.
 
 ## How does it work?
 

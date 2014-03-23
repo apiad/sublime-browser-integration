@@ -36,10 +36,11 @@ class BrowserIntegrationMainMenuCommand(sublime_plugin.ApplicationCommand):
                 BrowserIntegrationTypeCommand,
                 BrowserIntegrationClassCommand,
             ]),
-            ("Macro (experimental)", "Record and replay browser interaction.", [
+            ("Macro", "Record and replay browser interaction.", [
                 BrowserIntegrationRecordCommand,
                 BrowserIntegrationStopCommand,
                 BrowserIntegrationPlayCommand,
+                BrowserIntegrationPlaydelayCommand,
             ])
         ]
 

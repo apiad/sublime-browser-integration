@@ -39,44 +39,39 @@ if (!window.biMacros) {
         return segs.length ? '/' + segs.join('/') : null;
     };
 
-    window.biMacros.lookupElementByXPath = function (path) {
-        var evaluator = new XPathEvaluator();
-
-        var result = evaluator.evaluate(path, document.documentElement,
-            null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
-
-        return  result.singleNodeValue;
-    }
-
     window.biMacros.eventHandler = function (evt) {
         if (!localStorage.__bi_tracking_events) return;
 
         var counter = Number(localStorage.__bi_counter);
         localStorage.__bi_counter = counter + 1;
 
+        var time = + new Date();
+        var delay = time - Number(localStorage['__bi_event_time'])
+
         var eventData = {
             type: evt.type,
-            x: evt.pageX,
-            y: evt.pageY,
+            x: evt.offsetX,
+            y: evt.offsetY,
             btn: evt.which,
             altKey: evt.altKey,
             metaKey: evt.metaKey,
             ctrlKey: evt.ctrlKey,
             shiftKey: evt.shiftKey,
+            keyCode: evt.keyCode,
+            charCode: evt.charCode,
+            which: evt.which,
+            delay: delay,
             idx: counter,
             el: window.biMacros.createXPathFromElement(evt.target),
         }
 
         localStorage['__bi_event_' + counter] = JSON.stringify(eventData);
+        localStorage['__bi_event_time'] = time;
     }
 
-    document.addEventListener('click', window.biMacros.eventHandler);
-    document.addEventListener('keyup', window.biMacros.eventHandler);
-    document.addEventListener('keydown', window.biMacros.eventHandler);
-
-    var meta = document.createElement('meta');
-    meta.setAttribute('content', 'browser-integration');
-    document.querySelector('head').appendChild(meta);
+    document.addEventListener('mousedown', window.biMacros.eventHandler);
+    document.addEventListener('mouseup', window.biMacros.eventHandler);
+    document.addEventListener('keypress', window.biMacros.eventHandler);
 }
 """
 
@@ -84,15 +79,9 @@ if (!window.biMacros) {
 @async
 def inject_browser_macros_js():
     while True:
-        if browser.connected():
-            try:
-                browser.find_element_by_css_selector(
-                    'meta[content=browser-integration]')
-            except:
-                browser.execute(browser_macros_js)
-                print("Injecting browser macros")
+        if browser.connected() and browser.recording:
+            browser.execute(browser_macros_js)
+        else:
+            return
 
         time.sleep(0.1)
-
-
-# inject_browser_macros_js()
