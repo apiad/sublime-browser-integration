@@ -43,9 +43,12 @@ class BrowserIntegrationNavigateCommand(sublime_plugin.WindowCommand):
 
         def onQuickDone(i):
             if i == 0:
-                self.window.show_input_panel('Enter URL',
-                                             browser.current_url,
-                                             onDone, None, None)
+                view = self.window.show_input_panel('Enter URL',
+                                                    browser.current_url,
+                                                    onDone, None, None)
+
+                view.sel().add(sublime.Region(0, view.size()))
+
             elif i == 1:
                 browser.back()
             elif i == 2:
