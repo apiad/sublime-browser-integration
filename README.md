@@ -139,6 +139,8 @@ Opens the document source in a new tab. I've played with implementing live modif
 
 Opens a new document with the content of the `localStorage`. If the values in your `localStorage` are JSON-encoded objects, they will be decoded in the new buffer. Modifying the content of this buffer will automagically change the content of the `localStorage` to match the buffer content, as long as it is a valid JSON file. You don't need to save the buffer for changes to reflect on the browser, instead they are update as you type.
 
+**Note:** For safety reasons, content put in the `localStorage` by the plugin is not dumped back. The data put by the plugin in the `localStorage` is stored in keys that begin with `'__bi_'`, so please, refrain from using keys with such a prefix.
+
 <!-- ### View :: Create CSS bookmark
 
 **Key binding:** `ctrl+shift+b,v,b`
