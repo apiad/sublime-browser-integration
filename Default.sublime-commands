@@ -32,8 +32,16 @@
         "command": "browser_integration_localstorage"
     },
     {
-        "caption": "Browser Integration: Select elements",
+        "caption": "Browser Integration: Select elements by CSS",
         "command": "browser_integration_select"
+    },
+    {
+        "caption": "Browser Integration: Select elements by XPath",
+        "command": "browser_integration_selectxpath"
+    },
+    {
+        "caption": "Browser Integration: Interactive Selection",
+        "command": "browser_integration_selectint"
     },
     {
         "caption": "Browser Integration: Click elements",
