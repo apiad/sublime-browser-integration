@@ -69,7 +69,9 @@ Reloads the browser. <!-- You can configure the `reload_on_save` setting to auto
 
 **Key binding:** `ctrl+shift+b,n`
 
-If there are links (`a` with the `href` property defined) in the current page, a quick panel will display all the available links. Selecting any of them will make the browser navigate to it. The first option (`Custom URL`) opens an input panel to enter a custom URL to navigate to. The currently loaded URL is already selected in the input panel. If you don't type a valid locator (`http`, `https`, etc.), then `http://` is appended to the URL. If there are no links in the current page, the custom URL input panel is shown inmediately.
+If there are links (`a` with the `href` property defined) in the current page, a quick panel will display all the available links. Selecting any of them will make the browser navigate to it.
+
+The first three options are special links. The first option (`Custom URL`) opens an input panel to enter a custom URL to navigate to.  The currently loaded URL is already selected in the input panel. If you don't type a valid locator (`http`, `https`, etc.), then `http://` is appended to the URL. The second (`Back`) and third (`Forward`) option allow you to navigate back and forth respectively.
 
 ### Execute selected code
 

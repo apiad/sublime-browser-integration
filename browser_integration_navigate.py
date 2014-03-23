@@ -41,19 +41,20 @@ class BrowserIntegrationNavigateCommand(sublime_plugin.WindowCommand):
 
         result = browser.execute(get_links_js)
 
-        if result:
-            def onQuickDone(i):
-                if i == 0:
-                    self.window.show_input_panel('Enter URL',
-                                                 browser.current_url,
-                                                 onDone, None, None)
-                elif i > 0:
-                    browser.get(result[i-1][1])
+        def onQuickDone(i):
+            if i == 0:
+                self.window.show_input_panel('Enter URL',
+                                             browser.current_url,
+                                             onDone, None, None)
+            elif i == 1:
+                browser.back()
+            elif i == 2:
+                browser.forward()
+            elif i >= 3:
+                browser.get(result[i-3][1])
 
-            self.window.show_quick_panel(
-                [['Custom URL', 'Enter a custom URL to navigate']] + result,
-                onQuickDone)
-
-        else:
-            self.window.show_input_panel('Enter URL', browser.current_url,
-                                         onDone, None, None)
+        self.window.show_quick_panel(
+            [['Custom URL', 'Enter a custom URL to navigate'],
+             ['Back', 'Navigate to previous location'],
+             ['Forward', 'Navigate to next location']] + result,
+            onQuickDone)
