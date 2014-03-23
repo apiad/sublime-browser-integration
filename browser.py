@@ -79,14 +79,9 @@ class Browser:
         return self.selected_items
 
     def unselect(self):
-        if self.old_css_selector:
-            self.execute(unselect_css_js % self.old_css_selector)
-            self.old_css_selector = ""
-
-        if self.old_xpath_selector:
-            self.execute(unselect_xpath_js % self.old_xpath_selector)
-            self.old_xpath_selector = ""
-
+        self.execute(unselect_js)
+        self.old_xpath_selector = ""
+        self.old_css_selector = ""
         self.selected_items = []
 
     def execute(self, script):
@@ -117,17 +112,19 @@ select_css_js = """
     for (var i=0; i<elements.length; i++) {
         var el = elements[i];
         el.setAttribute("data-bi-outline", el.style.outline);
+        el.classList.add('bi-selected');
         el.style.outline = "%s";
     }
 """
 
 
-unselect_css_js = """
-    elements = document.querySelectorAll("%s");
+unselect_js = """
+    elements = document.querySelectorAll(".bi-selected");
 
     for (var i=0; i<elements.length; i++) {
         var el = elements[i];
         el.style.outline = el.getAttribute("data-bi-outline");
+        el.classList.remove('bi-selected');
     }
 """
 
@@ -142,20 +139,7 @@ select_xpath_js = """
 
     if (!!el) {
         el.setAttribute("data-bi-outline", el.style.outline);
+        el.classList.add('bi-selected');
         el.style.outline = "%s";
-    }
-"""
-
-
-unselect_xpath_js = """
-    var evaluator = new XPathEvaluator();
-
-    var result = evaluator.evaluate('%s', document.documentElement,
-        null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
-
-    var el = result.singleNodeValue;
-
-    if (!!el) {
-        el.style.outline = el.getAttribute("data-bi-outline");
     }
 """

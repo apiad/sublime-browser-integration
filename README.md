@@ -163,13 +163,25 @@ Restores the document stylesheets to the last saved state, if any.
 
 The commands in this submenu allow to directly interact with the DOM elements.
 
-### Interact :: Select elements by CSS
+### Interact :: Select by CSS
 
 **Key binding:** `ctrl+shift+b,i,s`
 
 Opens an input box, where you can type any valid CSS selector. Matching items are highlighted in the browser as you type, and stay highlighted after you close. These selected elements can be used in other commands, to make specific DOM manipulations. To unselect, launch the command again, and clear the input panel.
 
-If you have previously selected any DOM elements, the following commands will allow you to make modifications to those elements. These commands will only appear in the main menu if you have selected elements.
+### Interact :: Select by XPath
+
+**Key binding:** `ctrl+shift+b,i,s`
+
+The same as before, but now you can enter an XPath expression.
+
+### Interact :: Interactive Selection
+
+**Key binding:** `ctrl+shift+b,i,i`
+
+Opens a quick panel which contains a tree representation of the DOM. You can browse the panel and select a specific node to highlight it and select it. Press `ENTER` on a node to browse its children. The currently selected node is automatically highlighted on the browser.
+
+If you have previously selected any by any way DOM elements, the following commands will allow you to make modifications to those elements. These commands will only appear in the main menu if you have selected elements.
 
 ### Interact :: Click selected elements
 

@@ -76,7 +76,7 @@ get_dom_tree_js = """
 
 
 class BrowserIntegrationSelectintCommand(sublime_plugin.WindowCommand):
-    plugin_name = "Select elements (interactive)"
+    plugin_name = "Interactive Selection"
     plugin_description = "Opens a tree view of the DOM to select an element."
 
     @async
@@ -116,8 +116,6 @@ class BrowserIntegrationSelectintCommand(sublime_plugin.WindowCommand):
         self.window.show_quick_panel([el['tag'] for el in dom_tree],
                                      on_done(dom_tree), 0, 0, self.highlight)
 
-    @async
-    @require_browser
     def highlight(self, i):
         selector = self.items[i]['xpath']
         browser.select_xpath(selector)
