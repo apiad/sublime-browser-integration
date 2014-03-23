@@ -30,7 +30,6 @@ class BrowserIntegrationPlayCommand(sublime_plugin.WindowCommand):
                                 get_macro_info(os.path.join(dirpath,
                                                             filename)))
 
-        @async
         def play_macro(i):
             if i < 0:
                 return
@@ -41,7 +40,10 @@ class BrowserIntegrationPlayCommand(sublime_plugin.WindowCommand):
             for action in macro:
                 self.perform_action(action)
 
-        self.window.show_quick_panel(macros, play_macro)
+        if macros:
+            self.window.show_quick_panel(macros, play_macro)
+        else:
+            warning('No macros defined in the project.')
 
     def perform_action(self, action):
         attr = action['type']
