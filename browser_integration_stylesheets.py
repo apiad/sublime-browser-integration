@@ -100,11 +100,12 @@ class BrowserIntegrationStylesheetsCommand(sublime_plugin.WindowCommand):
 
                     for filename in filenames:
                         local_path = os.path.join(dirpath, filename)
+                        matched_path = local_path[len(folder) + 1:]
 
                         for pattern in matches:
                             re_pattern = match.expand(pattern)
 
-                            if re.match(re_pattern, local_path):
+                            if re.match(re_pattern, matched_path):
                                 return local_path
 
         return path
