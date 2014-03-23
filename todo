@@ -4,6 +4,10 @@ Current features:
   ☐ Macros
     ☐ Record interaction from Sublime as well (highlighting, clicking, typing, navigating)
 
+Support:
+  ☐ Firefox support
+    ☐ Test, test, test...
+
 New features:
   ☐ Live CSS editing
     ☐ Inject a custom `style` tag in the DOM with the CSS changes since last reload.
