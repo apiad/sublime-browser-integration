@@ -2,7 +2,7 @@ from .browser_integration import *
 
 
 class BrowserIntegrationExecuteCommand(sublime_plugin.TextCommand):
-    plugin_name = "Execute selected code"
+    plugin_name = "Selected code"
     plugin_description = "Executes selected JavaScript code in the browser."
 
     @require_browser

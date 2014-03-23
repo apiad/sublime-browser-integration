@@ -22,7 +22,9 @@ class BrowserIntegrationMainMenuCommand(sublime_plugin.ApplicationCommand):
             BrowserIntegrationLaunchCommand,
             BrowserIntegrationReloadCommand,
             BrowserIntegrationNavigateCommand,
-            BrowserIntegrationExecuteCommand,
+            ("Execute", "Execute snippets of code in the browser.", [
+                BrowserIntegrationExecuteCommand,
+            ]),
             ("View", "View and modify text data of current document", [
                 BrowserIntegrationStylesheetsCommand,
                 BrowserIntegrationSourceCommand,

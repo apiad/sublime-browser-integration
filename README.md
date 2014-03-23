@@ -73,15 +73,23 @@ If there are links (`a` with the `href` property defined) in the current page, a
 
 The first three options are special links. The first option (`Custom URL`) opens an input panel to enter a custom URL to navigate to.  The currently loaded URL is already selected in the input panel. If you don't type a valid locator (`http`, `https`, etc.), then `http://` is appended to the URL. The second (`Back`) and third (`Forward`) option allow you to navigate back and forth respectively.
 
-### Execute selected code
+### Execute
 
-**Key binding:** `ctrl+shift+b,e`
+The commands in this submenu allow you to inject code and data into the browser.
+
+### Execute :: Selected code
+
+**Key binding:** `ctrl+shift+b,e,c`
 
 Takes the selected JavaScript source and runs it in the browser. If the code returns something, it will be opened in a new tab. This is done independently for every selected region, and will open as many tabs as necessary, for every selected piece of script that returns something.
 
-### View load CSS (stylesheets)
+### View
 
-**Key binding:** `ctrl+shift+b,c`
+The commands in this submenu allow you to load and modify (sometimes live) document data. So far, this are the options:
+
+### View :: Loaded StyleSheets (CSS)
+
+**Key binding:** `ctrl+shift+b,v,c`
 
 Opens a quick panel with the list of all stylesheets that are currently loaded in the browser. Imported stylesheets (`link` tags) are listed by URL. Embedded stylesheets (`style` tags) are listed independently, with a small preview of the style code. Upon selecting one of the entries, a new tab is openned with the content of the stylesheet.
 
@@ -93,35 +101,75 @@ Right now I'm working on a feature to allow the specification of mappings betwee
 
 Another incoming feature is the live editing of these mapped CSS files, with automatic asynchronous browser reload, something I'm very excited of, but still trying to get to work.
 
-### Select elements
+### View :: Page Source
 
-**Key binding:** `ctrl+shift+b,s`
+**Key binding:** `ctrl+shift+b,v,s`
+
+Opens the document source in a new tab. I've played with implementing live modification of this page source, and its certainly possible but it seems rather useless. Most of the time in web development you don't write raw HTML, but rather rely on some templating engine, so the source code is only used to *see* if the output is as expected, but hardly ever modified.
+
+### View :: LocalStorage Content
+
+**Key binding:** `ctrl+shift+b,v,l`
+
+Opens a new document with the content of the `localStorage`. If the values in your `localStorage` are JSON-encoded objects, they will be decoded in the new buffer. Modifying the content of this buffer will automagically change the content of the `localStorage` to match the buffer content, as long as it is a valid JSON file. You don't need to save the buffer for changes to reflect on the browser, instead they are update as you type.
+
+<!-- ### View :: Create CSS bookmark
+
+**Key binding:** `ctrl+shift+b,v,b`
+
+Creates a bookmark point for the document stylesheets state. This point is saved in the localStorate, and contains all data necesary to restore CSS status later on, if you modify it, either on the browser, or through ST3. This command most useful use case is when combined with the next command.
+
+### View :: Show CSS diff
+
+**Key binding:** `ctrl+shift+,v,d`
+
+Computes the difference between the current stylesheets status and the last saved CSS bookmark, if any, and opens a new buffer with the changes. This is useful is you want to make some manual (interactive) modifications of styles in the browser, and then get the changes back to persist them.
+
+Right now I'm working on trying to automatically determine which of you local static files correspond to which CSS files, to patch them right on place.
+
+### View :: Restore CSS bookmark
+
+**Key binding:** `ctrl+shift+,v,r`
+
+Restores the document stylesheets to the last saved state, if any.
+ -->
+### Interact
+
+The commands in this submenu allow to directly interact with the DOM elements.
+
+### Interact :: Select elements
+
+**Key binding:** `ctrl+shift+b,i,s`
 
 Opens an input box, where you can type any valid CSS selector. Matching items are highlighted in the browser as you type, and stay highlighted after you close. These selected elements can be used in other commands, to make specific DOM manipulations. To unselect, launch the command again, and clear the input panel.
 
-### Modify DOM elements
-
 If you have previously selected any DOM elements, the following commands will allow you to make modifications to those elements. These commands will only appear in the main menu if you have selected elements.
 
-### Click selected elements
+### Interact :: Click selected elements
 
-**Key binding:** `ctrl+shift+b,d,c`
+**Key binding:** `ctrl+shift+b,i,c`
 
 Sends a click to selected elements.
 
-### Type into selected elements
+### Interact :: Type into selected elements
 
-**Key binding:** `ctrl+shift+b,d,t`
+**Key binding:** `ctrl+shift+b,i,t`
 
 Opens an input box to type a text, that will be sent to the browser and typed into the selected elements.
 
-### Change selected elements class
+### Interact :: Change selected elements class
 
-**Key binding:** `ctrl+shift+b,d,s`
+**Key binding:** `ctrl+shift+b,i,l`
 
 Open an input box with the value of the `class` attribute of selected elements. If there are more than one selected element, with different classes, the input box will show the union of the elements `class` attributes. Typing into the input panel will update the selected elements `class` attribute in real-time.
 
-## (Experimental) Task automation
+<!-- ### Interact :: Change element style
+
+**Key binding:** `ctrl+shift+b,i,s`
+
+Opens a new buffer with the selected element(s) CSS style rules. Changing these rules will automatically update the browser. -->
+
+### Macro (experimental)
 
 With these commands in combination you can easily automatize boring tasks. For instance, every time I work on my site's project, I open ST3, start my development server, open Chrome, navigate to `localhost:9090`, type in my credentials, and then I can start developing.
 
@@ -141,7 +189,6 @@ I'm working on a few exciting new features:
 
 * Automatic reload on save.
 * Live CSS editing.
-* Live highlight of selected jQuery selectors.
 * Macro recording and playing.
 * Support for other browsers (Firefox, Opera, perhaps even IE).
 * And many more...
