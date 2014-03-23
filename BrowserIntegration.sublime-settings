@@ -13,5 +13,32 @@
     "window_size": [480, 780],
     // This style will be applied to the `outline` property
     // of selected items (Select with CSS or XPath command)
-    "highlight_outline": "2px solid red"
+    "highlight_outline": "2px solid red",
+    // This section defines a mapping of hrefs to static files.
+    // It is used by some commands (view CSS and live CSS editing)
+    // to try to automagically find your local static files that
+    // match browser URLs and open those instead of
+    // directly downloading the link href.
+    "static_files_mapping": [
+        // Django-style matches.
+        // Links like `http://localhost:8000/static/path/to/style.css`
+        // will match all your internal projects `/static/` dirs,
+        // but **not** the external `static/` folder where Django
+        // collects static files.
+        {
+            "selector": "^http[s]?://localhost:\\d+/static/(.*)\\.css$",
+            "matches": [
+                "^(.+)/static/\\1.css$"
+            ]
+        },
+        // Exact matches.
+        // Links like `http://localhost:8000/path/to/style.css` will
+        // match exactly those file paths in your project folders.
+        {
+            "selector": "^http[s]?://localhost:\\d+/(.*)\\.css$",
+            "matches": [
+                "^\\1.css$"
+            ]
+        }
+    ]
 }

@@ -1,3 +1,5 @@
+import re
+
 from .browser_integration import *
 
 
@@ -10,7 +12,8 @@ get_css_hrefs_js = """
         var sheet = styleSheets[i];
 
         if (sheet.href) {
-            results.push([styleSheets[i].href, '']);
+            var href = sheet.href.split('/');
+            results.push([href[href.length-1], sheet.href]);
         }
     }
 
@@ -48,10 +51,18 @@ class BrowserIntegrationStylesheetsCommand(sublime_plugin.WindowCommand):
                     name = 'embedded-stylesheet-%i.css' % i
                 else:
                     from urllib.request import urlopen
+                    from urllib.parse import urlparse
 
-                    response = urlopen(results[i][0])
-                    text = response.read().decode('utf8')
-                    name = results[i][0]
+                    path = results[i][1]
+                    url = urlparse(path)
+
+                    if url.netloc:
+                        response = urlopen(results[i][1])
+                        text = response.read().decode('utf8')
+                        name = results[i][0]
+                    else:
+                        self.window.open_file(path, sublime.TRANSIENT)
+                        return
 
                 view = sublime.active_window().new_file()
                 view.set_name(name)
@@ -59,8 +70,41 @@ class BrowserIntegrationStylesheetsCommand(sublime_plugin.WindowCommand):
                 view.run_command("insert_into_view", {"text": text})
 
         results = browser.execute_script(get_css_hrefs_js)
+        statics = setting("static_files_mapping")
 
         if results:
+            with loading("Matching CSS files to local static files."):
+                for r in results:
+                    if not r[0].startswith('Embedded'):
+                        r[1] = self.get_local_path(r[1], statics)
+
             sublime.active_window().show_quick_panel(results, load_css)
         else:
             warning("There are no CSS style sheets loaded.")
+
+    def get_local_path(self, path, statics):
+        for mapping in statics:
+            selector = mapping['selector']
+            matches = mapping['matches']
+
+            match = re.match(selector, path, re.UNICODE)
+
+            if not match:
+                continue
+
+            for folder in self.window.folders():
+                for dirpath, dirnames, filenames in os.walk(folder,
+                                                            followlinks=True):
+                    if '.git' in dirnames:
+                        dirnames.remove('.git')
+
+                    for filename in filenames:
+                        local_path = os.path.join(dirpath, filename)
+
+                        for pattern in matches:
+                            re_pattern = match.expand(pattern)
+
+                            if re.match(re_pattern, local_path):
+                                return local_path
+
+        return path

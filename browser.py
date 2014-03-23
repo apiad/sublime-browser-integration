@@ -10,7 +10,7 @@ from .selenium.webdriver import Firefox
 class Browser:
     def __init__(self):
         from .browser_integration import status
-        status("Intializing BrowserIntegration instance.")
+        status("Intializing Browser instance.")
 
         self.webdriver = None
         self.selected_items = []
