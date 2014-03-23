@@ -1,6 +1,5 @@
 import sys
 import os
-import sublime
 
 sys.path.append(os.path.dirname(__file__))
 
@@ -49,8 +48,7 @@ class Browser:
             return self.webdriver.execute_script(script)
         except Exception as e:
             warning(str(e))
-            view = sublime.active_window().new_file()
-            view.run_command('insert_into_view', {'text': str(e)})
+            print(str(e))
 
     def __getattr__(self, attr):
         from .browser_integration import warning
