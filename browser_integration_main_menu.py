@@ -6,6 +6,7 @@ from .browser_integration_navigate import *
 from .browser_integration_execute import *
 from .browser_integration_stylesheets import *
 from .browser_integration_select import *
+from .browser_integration_selectint import *
 from .browser_integration_source import *
 from .browser_integration_click import *
 from .browser_integration_type import *
@@ -32,6 +33,8 @@ class BrowserIntegrationMainMenuCommand(sublime_plugin.ApplicationCommand):
             ]),
             ("Interact", "Interact with the document elements.", [
                 BrowserIntegrationSelectCommand,
+                BrowserIntegrationSelectxpathCommand,
+                BrowserIntegrationSelectintCommand,
                 BrowserIntegrationClickCommand,
                 BrowserIntegrationTypeCommand,
                 BrowserIntegrationClassCommand,
