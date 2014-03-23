@@ -11,7 +11,6 @@ from .browser import Browser
 
 SETTINGS_FILE = 'BrowserIntegration.sublime-settings'
 
-browser = Browser()
 log_file = '/var/log/sublime-browser-integration.log'
 
 
@@ -37,9 +36,7 @@ def async(function):
             with open(log_file, 'a') as f:
                 f.write(str(e) + '\n')
 
-            print(str(e))
             warning(str(e))
-
     return wrapper
 
 
@@ -83,22 +80,28 @@ class Loader:
     @async
     def run(self):
         count = 0
-        up = True
+        # up = True
+
+        chars = "◒◑◓◐"
 
         print("[Start] Browser Integration :: " + self.msg)
 
         while not self.stop:
-            load = "[" + " " * count + "=" + " " * (5 - count) + "]"
-            sublime.status_message(load + " Browser Integration :: " + self.msg)
+
+            # load = "[" + " " * count + "=" + " " * (5 - count) + "]"
+            load = chars[count % 4]
+            sublime.status_message("Browser Integration :: " + self.msg +
+                                   " " + load)
             time.sleep(0.1)
-            if up:
-                count += 1
-                if count >= 5:
-                    up = False
-            else:
-                count -= 1
-                if count <= 0:
-                    up = True
+            count += 1
+            # if up:
+            #     count += 1
+            #     if count >= 5:
+            #         up = False
+            # else:
+            #     count -= 1
+            #     if count <= 0:
+            #         up = True
 
         print("[End] Browser Integration :: " + self.msg)
         sublime.status_message("")
@@ -111,3 +114,6 @@ def loading(msg):
 class InsertIntoViewCommand(sublime_plugin.TextCommand):
     def run(self, edit, text):
         self.view.insert(edit, 0, text)
+
+
+browser = Browser()

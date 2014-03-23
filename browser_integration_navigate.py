@@ -39,7 +39,7 @@ class BrowserIntegrationNavigateCommand(sublime_plugin.WindowCommand):
 
             status("Loaded %s" % url)
 
-        result = browser.execute(get_links_js)
+        result = browser.execute(get_links_js) or []
 
         def onQuickDone(i):
             if i == 0:

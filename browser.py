@@ -9,7 +9,8 @@ from .selenium.webdriver import Firefox
 
 class Browser:
     def __init__(self):
-        print("Intializing BrowserIntegration instance.")
+        from .browser_integration import status
+        status("Intializing BrowserIntegration instance.")
 
         self.webdriver = None
         self.selected_items = []
@@ -30,8 +31,9 @@ class Browser:
             warning('Unknow browser driver: {}'.format(browser))
 
     def quit(self):
-        self.webdriver.quit()
-        self.webdriver = None
+        if self.webdriver:
+            self.webdriver.quit()
+            self.webdriver = None
 
     def select_css(self, selector):
         if selector:
@@ -55,12 +57,13 @@ class Browser:
             return self.webdriver.execute_script(script)
         except Exception as e:
             warning(str(e))
-            print(str(e))
 
     def __getattr__(self, attr):
         from .browser_integration import warning
 
         try:
             return getattr(self.webdriver, attr)
+        except AttributeError as e:
+            raise e
         except Exception as e:
             warning(str(e))
