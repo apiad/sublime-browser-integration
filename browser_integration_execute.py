@@ -18,6 +18,7 @@ class BrowserIntegrationExecuteCommand(sublime_plugin.TextCommand):
 
             if result is not None:
                 view = sublime.active_window().new_file()
-                view.set_syntax_file(
-                    "Packages/JavaScript/JavaScript.tmLanguage")
+                # view.set_syntax_file(
+                    # os.path.join(os.path.dirname(__file__), 'syntax',
+                    #              "JSON.tmLanguage"))
                 view.run_command("insert_into_view", {"text": str(result)})
