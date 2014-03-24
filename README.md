@@ -7,7 +7,8 @@ A Sublime Text 3 plugin for interacting with the browser and perform web develop
 
 This plugin is in **development** state, which means is **unstable**, and it might not work in your system. It **should** work with *Google Chrome* and *Chromium Browser* versions 31 to 34, and modern versions of *Firefox*, on modern versions of Linux, MacOSX and Windows, *but* it has only been tested so far with:
 
-* Ubuntu Linux 13.10 + ST3 (3059) + Chrome 31
+* Ubuntu Linux 13.10 x86 + ST3 (3059) + Chrome 31
+* Windows 8 x64 + ST3 (3047) + Chrome 32
 
 Current iterations are constantly changing the names, key bindings, and semantics of most commands, so every time you upgrade, something will likely not work the way it used to. Sorry for the inconvenience, I'm working as hard as possible to get a stable version out, but it will take me some time...
 
