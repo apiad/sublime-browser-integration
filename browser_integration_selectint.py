@@ -86,40 +86,39 @@ class BrowserIntegrationSelectintCommand(sublime_plugin.WindowCommand):
     @async
     @require_browser
     def run(self):
-        dom_tree = browser.execute(get_dom_tree_js)
+        with loading("Creating DOM tree."):
+            dom_tree = browser.execute(get_dom_tree_js)
 
-        def on_done(items, parent=None):
-            @async
-            def select(i):
-                if i < 0:
-                    return
+        def build_subtree(tree, path=[], depth=0, curr=[]):
+            result = []
 
-                if i == 0 and parent:
-                    child = parent
-                    children = [el['tag'] for el in parent['children']]
-                else:
-                    if parent:
-                        child = items[i-1]
-                    else:
-                        child = items[i]
+            node = path.pop(0) if path else None
 
-                    children = [el['tag'] for el in child['children']]
+            for i, t in enumerate(tree):
+                result.append(("    " * depth + t['tag'],
+                               t['xpath'], curr + [i]))
 
-                if children:
-                    if parent is not None:
-                        children = ['..'] + children
+                if i == node or len(tree) == 1:
+                    result.extend(build_subtree(t['children'], path,
+                                                depth + 1, curr + [i]))
 
-                    self.items = child['children']
-                    self.window.show_quick_panel(children,
-                                                 on_done(child['children'],
-                                                 None), 0, 0, self.highlight)
+            return result
 
-            return select
+        @async
+        def select(i):
+            if i < 0:
+                return
 
-        self.items = dom_tree
-        self.window.show_quick_panel([el['tag'] for el in dom_tree],
-                                     on_done(dom_tree), 0, 0, self.highlight)
+            tag, xpath, path = self.items[i]
+            self.items = build_subtree(dom_tree, path)
+
+            self.window.show_quick_panel([x for x, y, z in self.items],
+                                         select, 0, i, self.highlight)
+
+        self.items = build_subtree(dom_tree)
+        self.window.show_quick_panel([x for x, y, z in self.items],
+                                     select, 0, 0, self.highlight)
 
     def highlight(self, i):
-        selector = self.items[i]['xpath']
+        selector = self.items[i][1]
         browser.select_xpath(selector)
