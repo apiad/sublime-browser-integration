@@ -95,7 +95,7 @@ class BrowserIntegrationSelectintCommand(sublime_plugin.WindowCommand):
             node = path.pop(0) if path else None
 
             for i, t in enumerate(tree):
-                result.append(("    " * depth + t['tag'],
+                result.append(("  " * depth + t['tag'],
                                t['xpath'], curr + [i]))
 
                 if i == node or len(tree) == 1:
